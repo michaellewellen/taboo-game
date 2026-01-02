@@ -36,23 +36,24 @@
             color: #666;
             font-size: 14px;
         }
+        
+        .url-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2196F3;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
-    <h1>Connect to Taboo Game</h1>
+    <h1>Join Taboo Game</h1>
     
     <div class="qr-container">
         <div class="qr-section">
-            <h2>Step 1: Connect to WiFi</h2>
-            <img id="wifi-qr" src="/qr/wifi" alt="WiFi QR Code">
-            <p id="wifi-info">Loading network info...</p>
-            <p><em>(Skip if already connected)</em></p>
-        </div>
-        
-        <div class="qr-section">
-            <h2>Step 2: Join the Game</h2>
+            <h2>Scan to Join</h2>
             <img id="game-qr" src="/qr/game" alt="Game URL QR Code">
-            <p id="game-url">Loading game URL...</p>
+            <p class="url-text" id="game-url">Loading game URL...</p>
+            <p><em>Or share this link with other players</em></p>
         </div>
     </div>
     
@@ -61,10 +62,7 @@
         fetch('/network-info')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('wifi-info').textContent = 
-                    `Network: ${data.ssid}`;
-                document.getElementById('game-url').textContent = 
-                    `Or go to: ${data.gameUrl}`;
+                document.getElementById('game-url').textContent = data.gameUrl;
             });
     </script>
 </body>

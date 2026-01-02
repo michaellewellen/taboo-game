@@ -4,7 +4,7 @@
   "description": "This code is being made in cooperation with Claude.AI to teach me how to use Node.JS.  It will hopefully turn into a good family game where we can generate cards based on the original game from the 90s.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

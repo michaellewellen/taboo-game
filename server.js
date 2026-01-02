@@ -2,9 +2,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-
 const QRCode = require('qrcode');
-const readline = require('readline');
 const os = require('os');
 
 // Create Express app and HTTP server
@@ -19,38 +17,19 @@ let hostId = null;
 // Serve static files from 'public' folder
 app.use(express.static('public'));
 
-
-// Get local IP address
-function getLocalIP() {
-    const interfaces = os.networkInterfaces();
-    for (let iface of Object.values(interfaces)) {
-        for (let alias of iface) {
-            if (alias.family === 'IPv4' && !alias.internal) {
-                return alias.address;
-            }
-        }
-    }
-    return 'localhost';
-}
-
-// Store network credentials
-let networkSSID = '';
-let networkPassword = '';
-let gameUrl = '';
-
 // When a client connects via WebSocket
 io.on('connection', (socket) => {
     console.log('A player connected:', socket.id);
 
     if (hostId === null) {
-        hostID = socket.id;
+        hostId = socket.id;
         console.log('Host assigned:', socket.id);
     }
 
     sendLobbyUpdate();
 
     socket.on('join-team', (data)=> {
-        console.log(`${data.name} join Team ${data.team}`);
+        console.log(`${data.name} joined Team ${data.team}`);
 
         players.push({
             id: socket.id,
@@ -60,21 +39,22 @@ io.on('connection', (socket) => {
 
         sendLobbyUpdate();
     });
+    
     socket.on('disconnect', () => {
         console.log('Player disconnected:', socket.id);
 
-        players = players.filter(p =>p.id !== socket.id);
+        players = players.filter(p => p.id !== socket.id);
 
         if(socket.id === hostId && players.length > 0) {
-            hostID = players[0].id;
+            hostId = players[0].id;
             console.log('New host assigned:', hostId);
         } else if (players.length === 0) {
             hostId = null;
         }
 
         sendLobbyUpdate();
-        
     });
+    
     socket.on('start-game', ()=> {
         if (socket.id === hostId){
             console.log('Host started the game');
@@ -102,75 +82,38 @@ function sendLobbyUpdate() {
     }    
 }
 
-const PORT = 3000;
+// Use Railway's assigned port or 3000 for local dev
+const PORT = process.env.PORT || 3000;
 
-// Prompt for network credentials before starting server
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+// Get the game URL (Railway provides this, or use localhost for local dev)
+const gameUrl = process.env.RAILWAY_PUBLIC_DOMAIN 
+    ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` 
+    : `http://localhost:${PORT}`;
+
+server.listen(PORT, () => {
+    console.log(`\n=== Server Started ===`);
+    console.log(`Game URL: ${gameUrl}`);
+    console.log(`Server listening on port ${PORT}\n`);
 });
 
-console.log('\n=== Taboo Game Server Setup ===\n');
-
-rl.question('Enter WiFi Network Name (SSID): ', (ssid) => {
-    networkSSID = ssid;
-    
-    rl.question('Enter WiFi Password: ', (password) => {
-        networkPassword = password;
-        rl.close();
-        
-        // Start the server
-        startServer();
-    });
-});
-
-function startServer() {
-    const localIP = getLocalIP();
-    gameUrl = `http://${localIP}:${PORT}`;
-    
-    server.listen(PORT, () => {
-        console.log(`\n=== Server Started ===`);
-        console.log(`Network: ${networkSSID}`);
-        console.log(`Game URL: ${gameUrl}`);
-        console.log(`\nOpen this on your laptop: http://localhost:${PORT}/connect.html`);
-        console.log(`\nOr scan QR codes from that page on your phone.\n`);
-    });
-    
-    // Serve QR codes as images
-    app.get('/qr/wifi', async (req, res) => {
-        const wifiString = `WIFI:T:WPA;S:${networkSSID};P:${networkPassword};;`;
-        try {
-            const qrImage = await QRCode.toDataURL(wifiString);
-            const img = Buffer.from(qrImage.split(',')[1], 'base64');
-            res.writeHead(200, {
-                'Content-Type': 'image/png',
-                'Content-Length': img.length
-            });
-            res.end(img);
-        } catch (err) {
-            res.status(500).send('Error generating QR code');
-        }
-    });
-    
-    app.get('/qr/game', async (req, res) => {
-        try {
-            const qrImage = await QRCode.toDataURL(gameUrl);
-            const img = Buffer.from(qrImage.split(',')[1], 'base64');
-            res.writeHead(200, {
-                'Content-Type': 'image/png',
-                'Content-Length': img.length
-            });
-            res.end(img);
-        } catch (err) {
-            res.status(500).send('Error generating QR code');
-        }
-    });
-    
-    // Serve network info as JSON
-    app.get('/network-info', (req, res) => {
-        res.json({
-            ssid: networkSSID,
-            gameUrl: gameUrl
+// Serve QR code for game URL
+app.get('/qr/game', async (req, res) => {
+    try {
+        const qrImage = await QRCode.toDataURL(gameUrl);
+        const img = Buffer.from(qrImage.split(',')[1], 'base64');
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': img.length
         });
+        res.end(img);
+    } catch (err) {
+        res.status(500).send('Error generating QR code');
+    }
+});
+
+// Serve network info as JSON
+app.get('/network-info', (req, res) => {
+    res.json({
+        gameUrl: gameUrl
     });
-}
+});
