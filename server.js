@@ -88,6 +88,8 @@ const PORT = process.env.PORT || 3000;
 // Get the game URL (Railway provides this, or use localhost for local dev)
 const gameUrl = process.env.RAILWAY_PUBLIC_DOMAIN 
     ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` 
+    : process.env.RAILWAY_STATIC_URL
+    ? `https://${process.env.RAILWAY_STATIC_URL}`
     : `http://localhost:${PORT}`;
 
 server.listen(PORT, () => {
