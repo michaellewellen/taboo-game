@@ -8,7 +8,12 @@ const os = require('os');
 // Create Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
 // Game state
 let players = [];
