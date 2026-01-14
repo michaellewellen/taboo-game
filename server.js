@@ -99,7 +99,7 @@ const gameUrl = process.env.RAILWAY_PUBLIC_DOMAIN
     ? `https://${process.env.RAILWAY_STATIC_URL}`
     : `http://localhost:${PORT}`;
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`\n=== Server Started ===`);
     console.log(`Game URL: ${gameUrl}`);
     console.log(`Server listening on port ${PORT}\n`);
