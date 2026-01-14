@@ -11,7 +11,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
         origin: process.env.RAILWAY_PUBLIC_DOMAIN
-            ? 'https://${process.env.RAILWAY_PUBLIC_DOMAIN}'
+            ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
             : "http://localhost:3000",
         methods: ["GET", "POST"]
     }
