@@ -4,7 +4,7 @@ const http = require('http');
 const socketIo = require('socket.io');
 const QRCode = require('qrcode');
 const os = require('os');
-
+const pool = require('./database');
 // Create Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
@@ -98,6 +98,17 @@ const gameUrl = process.env.RAILWAY_PUBLIC_DOMAIN
     : process.env.RAILWAY_STATIC_URL
     ? `https://${process.env.RAILWAY_STATIC_URL}`
     : `http://localhost:${PORT}`;
+
+app.get('/api/cards', async (req, res) => {
+    try{
+        const result = await pool.query('SELECT * FROM taboo_cards WHERE used = false');
+        res.json(result.rows);
+    }
+    catch(err) {
+        console.error('Database error:', err);
+        res.status(500).json({error: 'Database error' });
+    }
+});
 
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`\n=== Server Started ===`);
