@@ -56,7 +56,10 @@
             <p><em>Or share this link with other players</em></p>
         </div>
     </div>
-    
+    <div class=""admin-section">
+        <button id = "reset-cards_btn" class="reset-btn">Reset All Cards to Unused</button>
+        <p id="reset-status"></p>
+    </div>
     <script>
         // Fetch network info to display
         fetch('/network-info')
@@ -64,6 +67,18 @@
             .then(data => {
                 document.getElementById('game-url').textContent = data.gameUrl;
             });
+
+        document.getElementById('reset-cards-btn').addEventListener('click', async () => {
+            if (confirm('Reset all cards to unused? This will give everyone a fresh slate.')){
+                const response = await fetch('/api/reset-cards', {method: 'POST' });
+                const data = await response.json();
+                document.getElementById('reset-status').textConten = 
+                    `${data.count} cards reset to unused`;
+                setTimeout(() => {
+                    document.getElementById('reset-status').textContent = '';
+                }, 3000);
+            }
+        });
     </script>
 </body>
 </html>

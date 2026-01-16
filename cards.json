@@ -1,0 +1,1142 @@
+[
+  {
+    "word": "DISHWASHER",
+    "taboo": ["Kitchen", "Appliance", "Clean", "Plates", "Machine"]
+  },
+  {
+    "word": "TOOTHBRUSH",
+    "taboo": ["Teeth", "Bathroom", "Bristles", "Morning", "Hygiene"]
+  },
+  {
+    "word": "PILLOW",
+    "taboo": ["Bed", "Sleep", "Soft", "Head", "Feather"]
+  },
+  {
+    "word": "BLANKET",
+    "taboo": ["Warm", "Bed", "Cover", "Cozy", "Soft"]
+  },
+  {
+    "word": "MICROWAVE",
+    "taboo": ["Heat", "Food", "Kitchen", "Quick", "Beep"]
+  },
+  {
+    "word": "BLENDER",
+    "taboo": ["Smoothie", "Kitchen", "Mix", "Spin", "Liquid"]
+  },
+  {
+    "word": "VACUUM",
+    "taboo": ["Clean", "Carpet", "Suck", "Dirt", "Noise"]
+  },
+  {
+    "word": "IRONING BOARD",
+    "taboo": ["Clothes", "Wrinkles", "Flat", "Press", "Hot"]
+  },
+  {
+    "word": "SHOWER CURTAIN",
+    "taboo": ["Bathroom", "Water", "Privacy", "Plastic", "Rings"]
+  },
+  {
+    "word": "DOORBELL",
+    "taboo": ["Ring", "Visitor", "Button", "Sound", "Front"]
+  },
+  {
+    "word": "MAILBOX",
+    "taboo": ["Letters", "Post", "Delivery", "Street", "Flag"]
+  },
+  {
+    "word": "LAWNMOWER",
+    "taboo": ["Grass", "Cut", "Yard", "Machine", "Summer"]
+  },
+  {
+    "word": "GARDEN HOSE",
+    "taboo": ["Water", "Spray", "Plants", "Rubber", "Long"]
+  },
+  {
+    "word": "WHEELBARROW",
+    "taboo": ["Dirt", "Push", "Garden", "One", "Wheel"]
+  },
+  {
+    "word": "HAMMOCK",
+    "taboo": ["Relax", "Swing", "Trees", "Rope", "Nap"]
+  },
+  {
+    "word": "BEYONCÉ",
+    "taboo": ["Singer", "Destiny", "Jay", "Queen", "Houston"]
+  },
+  {
+    "word": "ARCHITECT",
+    "taboo": ["Buildings", "Design", "Blueprint", "Construction", "Plans"]
+  },
+  {
+    "word": "SURGEON",
+    "taboo": ["Doctor", "Hospital", "Operation", "Scalpel", "Medical"]
+  },
+  {
+    "word": "VETERINARIAN",
+    "taboo": ["Animals", "Doctor", "Pets", "Clinic", "Medicine"]
+  },
+  {
+    "word": "ELECTRICIAN",
+    "taboo": ["Wires", "Power", "Fix", "Voltage", "Outlet"]
+  },
+  {
+    "word": "PLUMBER",
+    "taboo": ["Pipes", "Water", "Fix", "Wrench", "Leak"]
+  },
+  {
+    "word": "ACCOUNTANT",
+    "taboo": ["Money", "Taxes", "Numbers", "Calculator", "Books"]
+  },
+  {
+    "word": "PHARMACIST",
+    "taboo": ["Medicine", "Pills", "Prescription", "Drugstore", "Bottle"]
+  },
+  {
+    "word": "JOURNALIST",
+    "taboo": ["News", "Write", "Reporter", "Story", "Press"]
+  },
+  {
+    "word": "TRANSLATOR",
+    "taboo": ["Language", "Words", "Convert", "Speak", "Interpret"]
+  },
+  {
+    "word": "OPRAH",
+    "taboo": ["Talk", "Show", "Winfrey", "Chicago", "Magazine"]
+  },
+  {
+    "word": "SQUIRREL",
+    "taboo": ["Nuts", "Tree", "Tail", "Rodent", "Acorn"]
+  },
+  {
+    "word": "RACCOON",
+    "taboo": ["Trash", "Mask", "Nocturnal", "Bandit", "Paws"]
+  },
+  {
+    "word": "SKUNK",
+    "taboo": ["Smell", "Spray", "Black", "White", "Stripe"]
+  },
+  {
+    "word": "BEAVER",
+    "taboo": ["Dam", "Water", "Teeth", "Wood", "Tail"]
+  },
+  {
+    "word": "PORCUPINE",
+    "taboo": ["Quills", "Sharp", "Rodent", "Defense", "Spikes"]
+  },
+  {
+    "word": "ARMADILLO",
+    "taboo": ["Shell", "Texas", "Armor", "Dig", "Roll"]
+  },
+  {
+    "word": "HEDGEHOG",
+    "taboo": ["Spines", "Small", "Cute", "Roll", "Pet"]
+  },
+  {
+    "word": "CHIPMUNK",
+    "taboo": ["Stripes", "Cheeks", "Small", "Alvin", "Nuts"]
+  },
+  {
+    "word": "BADGER",
+    "taboo": ["Burrow", "Stripes", "Fierce", "Dig", "Nocturnal"]
+  },
+  {
+    "word": "OTTER",
+    "taboo": ["Water", "Playful", "Fish", "River", "Cute"]
+  },
+  {
+    "word": "MANATEE",
+    "taboo": ["Sea", "Cow", "Slow", "Florida", "Endangered"]
+  },
+  {
+    "word": "TAYLOR SWIFT",
+    "taboo": ["Singer", "Country", "Pop", "Eras", "Travis"]
+  },
+  {
+    "word": "SUSHI",
+    "taboo": ["Raw", "Fish", "Rice", "Japan", "Roll"]
+  },
+  {
+    "word": "BURRITO",
+    "taboo": ["Wrap", "Mexican", "Beans", "Tortilla", "Filling"]
+  },
+  {
+    "word": "LASAGNA",
+    "taboo": ["Pasta", "Layers", "Cheese", "Italian", "Baked"]
+  },
+  {
+    "word": "QUESADILLA",
+    "taboo": ["Cheese", "Tortilla", "Mexican", "Folded", "Grilled"]
+  },
+  {
+    "word": "BURGERS",
+    "taboo": ["Beef", "Bun", "Patty", "Grill", "Fast"]
+  },
+  {
+    "word": "WAFFLES",
+    "taboo": ["Breakfast", "Syrup", "Grid", "Butter", "Belgian"]
+  },
+  {
+    "word": "PANCAKES",
+    "taboo": ["Breakfast", "Flat", "Syrup", "Stack", "Griddle"]
+  },
+  {
+    "word": "OMELETTE",
+    "taboo": ["Eggs", "Fold", "Cheese", "Breakfast", "Pan"]
+  },
+  {
+    "word": "CROISSANT",
+    "taboo": ["French", "Flaky", "Butter", "Crescent", "Pastry"]
+  },
+  {
+    "word": "BAGEL",
+    "taboo": ["Bread", "Hole", "Cream", "Cheese", "Round"]
+  },
+  {
+    "word": "EIFFEL TOWER",
+    "taboo": ["Paris", "France", "Metal", "Tall", "Landmark"]
+  },
+  {
+    "word": "POPCORN",
+    "taboo": ["Movie", "Butter", "Kernel", "Pop", "Snack"]
+  },
+  {
+    "word": "PRETZEL",
+    "taboo": ["Twisted", "Salt", "Snack", "Knot", "Baked"]
+  },
+  {
+    "word": "NACHOS",
+    "taboo": ["Chips", "Cheese", "Mexican", "Toppings", "Crispy"]
+  },
+  {
+    "word": "CHEESECAKE",
+    "taboo": ["Dessert", "Cream", "Sweet", "Slice", "Rich"]
+  },
+  {
+    "word": "BROWNIES",
+    "taboo": ["Chocolate", "Baked", "Square", "Dessert", "Fudge"]
+  },
+  {
+    "word": "TIRAMISU",
+    "taboo": ["Italian", "Coffee", "Dessert", "Mascarpone", "Layers"]
+  },
+  {
+    "word": "GELATO",
+    "taboo": ["Italian", "Ice", "Cream", "Cold", "Flavor"]
+  },
+  {
+    "word": "SORBET",
+    "taboo": ["Frozen", "Fruit", "Ice", "Dairy", "Sweet"]
+  },
+  {
+    "word": "FUDGE",
+    "taboo": ["Chocolate", "Sweet", "Candy", "Soft", "Rich"]
+  },
+  {
+    "word": "STATUE OF LIBERTY",
+    "taboo": ["New", "York", "Torch", "Green", "Island"]
+  },
+  {
+    "word": "TRAMPOLINE",
+    "taboo": ["Jump", "Bounce", "Springs", "Backyard", "Fun"]
+  },
+  {
+    "word": "TREADMILL",
+    "taboo": ["Run", "Exercise", "Gym", "Belt", "Machine"]
+  },
+  {
+    "word": "YOGA MAT",
+    "taboo": ["Exercise", "Floor", "Stretch", "Rubber", "Roll"]
+  },
+  {
+    "word": "DUMBBELLS",
+    "taboo": ["Weights", "Lift", "Gym", "Exercise", "Heavy"]
+  },
+  {
+    "word": "JUMP ROPE",
+    "taboo": ["Skip", "Exercise", "Cardio", "Swing", "Handles"]
+  },
+  {
+    "word": "HULA HOOP",
+    "taboo": ["Circle", "Spin", "Waist", "Plastic", "Toy"]
+  },
+  {
+    "word": "FRISBEE",
+    "taboo": ["Disc", "Throw", "Catch", "Fly", "Park"]
+  },
+  {
+    "word": "SKATEBOARD",
+    "taboo": ["Wheels", "Deck", "Tricks", "Roll", "Ramp"]
+  },
+  {
+    "word": "ROLLERBLADES",
+    "taboo": ["Wheels", "Skate", "Roll", "Inline", "Fast"]
+  },
+  {
+    "word": "SCOOTER",
+    "taboo": ["Wheels", "Push", "Handlebars", "Kick", "Ride"]
+  },
+  {
+    "word": "GRAND CANYON",
+    "taboo": ["Arizona", "Deep", "Gorge", "Colorado", "National"]
+  },
+  {
+    "word": "HARMONICA",
+    "taboo": ["Blow", "Music", "Small", "Metal", "Mouth"]
+  },
+  {
+    "word": "ACCORDION",
+    "taboo": ["Squeeze", "Music", "Keys", "Bellows", "Polka"]
+  },
+  {
+    "word": "UKULELE",
+    "taboo": ["Strings", "Small", "Hawaii", "Strum", "Music"]
+  },
+  {
+    "word": "XYLOPHONE",
+    "taboo": ["Bars", "Hit", "Mallets", "Music", "Colorful"]
+  },
+  {
+    "word": "TAMBOURINE",
+    "taboo": ["Shake", "Jingles", "Music", "Hit", "Percussion"]
+  },
+  {
+    "word": "CASTANETS",
+    "taboo": ["Click", "Spanish", "Dance", "Wood", "Fingers"]
+  },
+  {
+    "word": "MARACAS",
+    "taboo": ["Shake", "Music", "Rattle", "Seeds", "Pair"]
+  },
+  {
+    "word": "BONGOS",
+    "taboo": ["Drums", "Pair", "Hit", "Music", "Small"]
+  },
+  {
+    "word": "CYMBALS",
+    "taboo": ["Crash", "Metal", "Music", "Loud", "Percussion"]
+  },
+  {
+    "word": "GONG",
+    "taboo": ["Hit", "Metal", "Large", "Sound", "Loud"]
+  },
+  {
+    "word": "NIAGARA FALLS",
+    "taboo": ["Water", "Canada", "Border", "Mist", "Barrel"]
+  },
+  {
+    "word": "TELESCOPE",
+    "taboo": ["Stars", "Look", "Sky", "Space", "Lens"]
+  },
+  {
+    "word": "BINOCULARS",
+    "taboo": ["Two", "Eyes", "Look", "Far", "Zoom"]
+  },
+  {
+    "word": "MICROSCOPE",
+    "taboo": ["Small", "Lens", "Science", "Magnify", "Lab"]
+  },
+  {
+    "word": "STETHOSCOPE",
+    "taboo": ["Doctor", "Heart", "Listen", "Chest", "Medical"]
+  },
+  {
+    "word": "THERMOMETER",
+    "taboo": ["Temperature", "Fever", "Measure", "Sick", "Mercury"]
+  },
+  {
+    "word": "BAROMETER",
+    "taboo": ["Pressure", "Weather", "Measure", "Air", "Forecast"]
+  },
+  {
+    "word": "COMPASS",
+    "taboo": ["North", "Direction", "Needle", "Navigate", "Lost"]
+  },
+  {
+    "word": "PROTRACTOR",
+    "taboo": ["Angle", "Measure", "Math", "Degrees", "Semi"]
+  },
+  {
+    "word": "RULER",
+    "taboo": ["Measure", "Straight", "Inches", "Line", "Length"]
+  },
+  {
+    "word": "CALCULATOR",
+    "taboo": ["Math", "Numbers", "Add", "Buttons", "Display"]
+  },
+  {
+    "word": "MOUNT RUSHMORE",
+    "taboo": ["Presidents", "South", "Dakota", "Faces", "Carved"]
+  },
+  {
+    "word": "STAPLER",
+    "taboo": ["Office", "Paper", "Metal", "Attach", "Click"]
+  },
+  {
+    "word": "PAPER CLIP",
+    "taboo": ["Metal", "Wire", "Bend", "Hold", "Office"]
+  },
+  {
+    "word": "THUMBTACK",
+    "taboo": ["Pin", "Push", "Board", "Sharp", "Hold"]
+  },
+  {
+    "word": "RUBBER BAND",
+    "taboo": ["Elastic", "Snap", "Stretch", "Hold", "Circle"]
+  },
+  {
+    "word": "TAPE DISPENSER",
+    "taboo": ["Office", "Sticky", "Cut", "Roll", "Heavy"]
+  },
+  {
+    "word": "HIGHLIGHTER",
+    "taboo": ["Yellow", "Marker", "Bright", "Text", "Study"]
+  },
+  {
+    "word": "WHITEBOARD",
+    "taboo": ["Marker", "Erase", "Write", "Classroom", "White"]
+  },
+  {
+    "word": "CHALKBOARD",
+    "taboo": ["Write", "Dust", "Classroom", "Erase", "Black"]
+  },
+  {
+    "word": "BULLETIN BOARD",
+    "taboo": ["Cork", "Pin", "Notes", "Wall", "Display"]
+  },
+  {
+    "word": "FILE CABINET",
+    "taboo": ["Drawers", "Office", "Papers", "Storage", "Metal"]
+  },
+  {
+    "word": "COLOSSEUM",
+    "taboo": ["Rome", "Italy", "Gladiator", "Ancient", "Arena"]
+  },
+  {
+    "word": "GLUE STICK",
+    "taboo": ["Adhesive", "Stick", "Paper", "Craft", "Twist"]
+  },
+  {
+    "word": "SCISSORS",
+    "taboo": ["Cut", "Sharp", "Blades", "Handles", "Paper"]
+  },
+  {
+    "word": "ERASER",
+    "taboo": ["Rubber", "Remove", "Pencil", "Mistake", "Pink"]
+  },
+  {
+    "word": "PENCIL SHARPENER",
+    "taboo": ["Point", "Twist", "Blade", "Shavings", "Sharp"]
+  },
+  {
+    "word": "CRAYON",
+    "taboo": ["Wax", "Color", "Draw", "Kids", "Box"]
+  },
+  {
+    "word": "MARKER",
+    "taboo": ["Draw", "Color", "Tip", "Permanent", "Ink"]
+  },
+  {
+    "word": "WATERCOLOR",
+    "taboo": ["Paint", "Water", "Brush", "Art", "Palette"]
+  },
+  {
+    "word": "PAINTBRUSH",
+    "taboo": ["Bristles", "Paint", "Art", "Handle", "Stroke"]
+  },
+  {
+    "word": "CANVAS",
+    "taboo": ["Paint", "Art", "Cloth", "Frame", "Picture"]
+  },
+  {
+    "word": "EASEL",
+    "taboo": ["Stand", "Paint", "Art", "Hold", "Canvas"]
+  },
+  {
+    "word": "GREAT WALL",
+    "taboo": ["China", "Long", "Ancient", "Defense", "Stone"]
+  },
+  {
+    "word": "PALETTE",
+    "taboo": ["Paint", "Colors", "Mix", "Art", "Hold"]
+  },
+  {
+    "word": "CHARCOAL",
+    "taboo": ["Draw", "Black", "Art", "Smudge", "Sketch"]
+  },
+  {
+    "word": "PASTEL",
+    "taboo": ["Draw", "Chalk", "Color", "Soft", "Art"]
+  },
+  {
+    "word": "SCULPTURE",
+    "taboo": ["Art", "Carve", "Statue", "Clay", "Form"]
+  },
+  {
+    "word": "POTTERY",
+    "taboo": ["Clay", "Wheel", "Vase", "Kiln", "Ceramic"]
+  },
+  {
+    "word": "KILN",
+    "taboo": ["Hot", "Fire", "Pottery", "Clay", "Bake"]
+  },
+  {
+    "word": "LOOM",
+    "taboo": ["Weave", "Thread", "Fabric", "Craft", "Yarn"]
+  },
+  {
+    "word": "KNITTING NEEDLES",
+    "taboo": ["Yarn", "Stitch", "Pair", "Craft", "Sweater"]
+  },
+  {
+    "word": "CROCHET HOOK",
+    "taboo": ["Yarn", "Loop", "Stitch", "Craft", "Single"]
+  },
+  {
+    "word": "SEWING MACHINE",
+    "taboo": ["Thread", "Stitch", "Fabric", "Needle", "Pedal"]
+  },
+  {
+    "word": "STONEHENGE",
+    "taboo": ["England", "Rocks", "Ancient", "Circle", "Mystery"]
+  },
+  {
+    "word": "THIMBLE",
+    "taboo": ["Finger", "Sew", "Protect", "Metal", "Push"]
+  },
+  {
+    "word": "PINCUSHION",
+    "taboo": ["Needles", "Sew", "Hold", "Stick", "Soft"]
+  },
+  {
+    "word": "MEASURING TAPE",
+    "taboo": ["Length", "Inches", "Flexible", "Sew", "Measure"]
+  },
+  {
+    "word": "ZIPPER",
+    "taboo": ["Teeth", "Up", "Close", "Jacket", "Pull"]
+  },
+  {
+    "word": "VELCRO",
+    "taboo": ["Stick", "Rip", "Hook", "Loop", "Fastener"]
+  },
+  {
+    "word": "BUTTON",
+    "taboo": ["Sew", "Shirt", "Hole", "Round", "Press"]
+  },
+  {
+    "word": "SNAP",
+    "taboo": ["Fastener", "Click", "Press", "Clothes", "Metal"]
+  },
+  {
+    "word": "BUCKLE",
+    "taboo": ["Belt", "Metal", "Fasten", "Strap", "Click"]
+  },
+  {
+    "word": "LACE",
+    "taboo": ["Shoe", "Tie", "String", "Thread", "Hole"]
+  },
+  {
+    "word": "TAJ MAHAL",
+    "taboo": ["India", "White", "Tomb", "Marble", "Love"]
+  },
+  {
+    "word": "HANDKERCHIEF",
+    "taboo": ["Cloth", "Nose", "Blow", "Pocket", "Square"]
+  },
+  {
+    "word": "APRON",
+    "taboo": ["Cook", "Wear", "Protect", "Tie", "Kitchen"]
+  },
+  {
+    "word": "OVEN MITT",
+    "taboo": ["Hot", "Kitchen", "Hand", "Protection", "Bake"]
+  },
+  {
+    "word": "DISH TOWEL",
+    "taboo": ["Dry", "Kitchen", "Cloth", "Wipe", "Dishes"]
+  },
+  {
+    "word": "SPONGE",
+    "taboo": ["Wash", "Dishes", "Soap", "Scrub", "Yellow"]
+  },
+  {
+    "word": "SCRUB BRUSH",
+    "taboo": ["Clean", "Bristles", "Scrub", "Hard", "Handle"]
+  },
+  {
+    "word": "MOP",
+    "taboo": ["Floor", "Clean", "Wet", "Handle", "Bucket"]
+  },
+  {
+    "word": "BUCKET",
+    "taboo": ["Water", "Carry", "Handle", "Container", "Clean"]
+  },
+  {
+    "word": "DUSTPAN",
+    "taboo": ["Sweep", "Broom", "Dirt", "Collect", "Handle"]
+  },
+  {
+    "word": "BROOM",
+    "taboo": ["Sweep", "Floor", "Bristles", "Clean", "Handle"]
+  },
+  {
+    "word": "BIG BEN",
+    "taboo": ["London", "Clock", "Tower", "England", "Bell"]
+  },
+  {
+    "word": "FEATHER DUSTER",
+    "taboo": ["Clean", "Dust", "Soft", "Handle", "Tickle"]
+  },
+  {
+    "word": "SPRAY BOTTLE",
+    "taboo": ["Clean", "Liquid", "Trigger", "Squirt", "Mist"]
+  },
+  {
+    "word": "PLUNGER",
+    "taboo": ["Toilet", "Clog", "Suction", "Bathroom", "Push"]
+  },
+  {
+    "word": "TOILET BRUSH",
+    "taboo": ["Clean", "Bathroom", "Scrub", "Bowl", "Bristles"]
+  },
+  {
+    "word": "TOILET PAPER",
+    "taboo": ["Bathroom", "Roll", "Wipe", "Soft", "White"]
+  },
+  {
+    "word": "PAPER TOWEL",
+    "taboo": ["Clean", "Wipe", "Roll", "Absorb", "Kitchen"]
+  },
+  {
+    "word": "NAPKIN",
+    "taboo": ["Wipe", "Mouth", "Paper", "Meal", "Lap"]
+  },
+  {
+    "word": "TABLECLOTH",
+    "taboo": ["Cover", "Table", "Cloth", "Protect", "Dinner"]
+  },
+  {
+    "word": "PLACEMAT",
+    "taboo": ["Table", "Under", "Plate", "Protect", "Individual"]
+  },
+  {
+    "word": "COASTER",
+    "taboo": ["Drink", "Cup", "Protect", "Table", "Ring"]
+  },
+  {
+    "word": "LADLE",
+    "taboo": ["Soup", "Scoop", "Bowl", "Handle", "Serve"]
+  },
+  {
+    "word": "SPATULA",
+    "taboo": ["Flip", "Flat", "Cook", "Pancake", "Turner"]
+  },
+  {
+    "word": "WHISK",
+    "taboo": ["Mix", "Eggs", "Beat", "Wires", "Stir"]
+  },
+  {
+    "word": "TONGS",
+    "taboo": ["Grip", "Squeeze", "Pick", "Metal", "Salad"]
+  },
+  {
+    "word": "GRATER",
+    "taboo": ["Cheese", "Shred", "Sharp", "Holes", "Kitchen"]
+  },
+  {
+    "word": "PEELER",
+    "taboo": ["Skin", "Potato", "Remove", "Blade", "Vegetable"]
+  },
+  {
+    "word": "COLANDER",
+    "taboo": ["Drain", "Pasta", "Holes", "Strainer", "Bowl"]
+  },
+  {
+    "word": "SIEVE",
+    "taboo": ["Strain", "Mesh", "Flour", "Fine", "Holes"]
+  },
+  {
+    "word": "ROLLING PIN",
+    "taboo": ["Dough", "Flat", "Roll", "Bake", "Cylinder"]
+  },
+  {
+    "word": "COOKIE CUTTER",
+    "taboo": ["Dough", "Shape", "Bake", "Metal", "Press"]
+  },
+  {
+    "word": "MIXING BOWL",
+    "taboo": ["Stir", "Ingredients", "Kitchen", "Round", "Combine"]
+  },
+  {
+    "word": "MEASURING CUP",
+    "taboo": ["Pour", "Kitchen", "Amount", "Volume", "Recipe"]
+  },
+  {
+    "word": "MEASURING SPOON",
+    "taboo": ["Small", "Recipe", "Amount", "Set", "Kitchen"]
+  },
+  {
+    "word": "OVEN",
+    "taboo": ["Bake", "Hot", "Kitchen", "Cook", "Heat"]
+  },
+  {
+    "word": "STOVE",
+    "taboo": ["Cook", "Burner", "Kitchen", "Heat", "Pot"]
+  },
+  {
+    "word": "REFRIGERATOR",
+    "taboo": ["Cold", "Food", "Kitchen", "Keep", "Door"]
+  },
+  {
+    "word": "FREEZER",
+    "taboo": ["Ice", "Cold", "Food", "Frozen", "Keep"]
+  },
+  {
+    "word": "TOASTER",
+    "taboo": ["Bread", "Brown", "Hot", "Pop", "Slots"]
+  },
+  {
+    "word": "COFFEE MAKER",
+    "taboo": ["Brew", "Morning", "Hot", "Drink", "Machine"]
+  },
+  {
+    "word": "KETTLE",
+    "taboo": ["Water", "Boil", "Tea", "Whistle", "Hot"]
+  },
+  {
+    "word": "TEAPOT",
+    "taboo": ["Brew", "Leaves", "Pour", "Hot", "Spout"]
+  },
+  {
+    "word": "SUGAR BOWL",
+    "taboo": ["Sweet", "Container", "Spoon", "White", "Granules"]
+  },
+  {
+    "word": "SALT SHAKER",
+    "taboo": ["Seasoning", "White", "Holes", "Shake", "Table"]
+  },
+  {
+    "word": "PEPPER GRINDER",
+    "taboo": ["Spice", "Twist", "Black", "Mill", "Fresh"]
+  },
+  {
+    "word": "BREAD BOX",
+    "taboo": ["Store", "Fresh", "Container", "Loaf", "Kitchen"]
+  },
+  {
+    "word": "FRUIT BOWL",
+    "taboo": ["Apples", "Display", "Counter", "Kitchen", "Round"]
+  },
+  {
+    "word": "WINE RACK",
+    "taboo": ["Bottles", "Store", "Hold", "Kitchen", "Horizontal"]
+  },
+  {
+    "word": "CORKSCREW",
+    "taboo": ["Wine", "Open", "Bottle", "Twist", "Cork"]
+  },
+  {
+    "word": "CHICHEN ITZA",
+    "taboo": ["Mexico", "Mayan", "Pyramid", "Ancient", "Ruins"]
+  },
+  {
+    "word": "BOTTLE OPENER",
+    "taboo": ["Cap", "Beer", "Remove", "Metal", "Pop"]
+  },
+  {
+    "word": "CAN OPENER",
+    "taboo": ["Metal", "Lid", "Turn", "Kitchen", "Sharp"]
+  },
+  {
+    "word": "TUPPERWARE",
+    "taboo": ["Container", "Plastic", "Food", "Lid", "Store"]
+  },
+  {
+    "word": "ALUMINUM FOIL",
+    "taboo": ["Wrap", "Cover", "Shiny", "Kitchen", "Roll"]
+  },
+  {
+    "word": "PLASTIC WRAP",
+    "taboo": ["Clear", "Cover", "Cling", "Food", "Seal"]
+  },
+  {
+    "word": "PARCHMENT PAPER",
+    "taboo": ["Bake", "Sheet", "Non", "Stick", "Roll"]
+  },
+  {
+    "word": "WAX PAPER",
+    "taboo": ["Wrap", "Kitchen", "Roll", "Moisture", "Coat"]
+  },
+  {
+    "word": "ZIPLOCK BAG",
+    "taboo": ["Seal", "Plastic", "Store", "Close", "Food"]
+  },
+  {
+    "word": "LUNCH BOX",
+    "taboo": ["Food", "Carry", "School", "Container", "Meal"]
+  },
+  {
+    "word": "THERMOS",
+    "taboo": ["Hot", "Drink", "Keep", "Insulated", "Container"]
+  },
+  {
+    "word": "CHRIST THE REDEEMER",
+    "taboo": ["Brazil", "Rio", "Statue", "Jesus", "Mountain"]
+  },
+  {
+    "word": "WATER BOTTLE",
+    "taboo": ["Drink", "Hydrate", "Carry", "Plastic", "Refill"]
+  },
+  {
+    "word": "TRAVEL MUG",
+    "taboo": ["Coffee", "Lid", "Insulated", "Carry", "Commute"]
+  },
+  {
+    "word": "STRAW",
+    "taboo": ["Drink", "Sip", "Tube", "Paper", "Plastic"]
+  },
+  {
+    "word": "COASTER",
+    "taboo": ["Drink", "Cup", "Protect", "Table", "Ring"]
+  },
+  {
+    "word": "CHIP CLIP",
+    "taboo": ["Bag", "Close", "Seal", "Plastic", "Fresh"]
+  },
+  {
+    "word": "TWIST TIE",
+    "taboo": ["Bread", "Close", "Bag", "Wire", "Twist"]
+  },
+  {
+    "word": "SHOPPING BAG",
+    "taboo": ["Carry", "Groceries", "Store", "Handles", "Reusable"]
+  },
+  {
+    "word": "GROCERY CART",
+    "taboo": ["Shop", "Push", "Wheels", "Store", "Basket"]
+  },
+  {
+    "word": "BASKET",
+    "taboo": ["Carry", "Weave", "Handle", "Container", "Hold"]
+  },
+  {
+    "word": "COOLER",
+    "taboo": ["Ice", "Cold", "Beach", "Drinks", "Keep"]
+  },
+  {
+    "word": "PICNIC BASKET",
+    "taboo": ["Food", "Outdoor", "Carry", "Blanket", "Meal"]
+  },
+  {
+    "word": "BEACH TOWEL",
+    "taboo": ["Sand", "Large", "Dry", "Lay", "Ocean"]
+  },
+  {
+    "word": "BEACH UMBRELLA",
+    "taboo": ["Shade", "Sand", "Sun", "Large", "Stick"]
+  },
+  {
+    "word": "SANDCASTLE",
+    "taboo": ["Beach", "Build", "Bucket", "Shore", "Sculpture"]
+  },
+  {
+    "word": "BEACH BALL",
+    "taboo": ["Inflatable", "Colorful", "Round", "Throw", "Ocean"]
+  },
+  {
+    "word": "FLOATIES",
+    "taboo": ["Arms", "Swim", "Inflate", "Kids", "Water"]
+  },
+  {
+    "word": "LIFE JACKET",
+    "taboo": ["Safety", "Float", "Wear", "Water", "Orange"]
+  },
+  {
+    "word": "GOGGLES",
+    "taboo": ["Eyes", "Swim", "Underwater", "See", "Protect"]
+  },
+  {
+    "word": "SNORKEL",
+    "taboo": ["Tube", "Breathe", "Underwater", "Swim", "Mouth"]
+  },
+  {
+    "word": "FLIPPERS",
+    "taboo": ["Feet", "Swim", "Fast", "Rubber", "Underwater"]
+  },
+  {
+    "word": "WETSUIT",
+    "taboo": ["Surf", "Tight", "Warm", "Water", "Rubber"]
+  },
+  {
+    "word": "SURFBOARD",
+    "taboo": ["Waves", "Ride", "Ocean", "Stand", "Board"]
+  },
+  {
+    "word": "PADDLEBOARD",
+    "taboo": ["Stand", "Water", "Balance", "Oar", "Float"]
+  },
+  {
+    "word": "KAYAK",
+    "taboo": ["Paddle", "Water", "Boat", "Sit", "River"]
+  },
+  {
+    "word": "CANOE",
+    "taboo": ["Paddle", "Water", "Boat", "Long", "Lake"]
+  },
+  {
+    "word": "OAR",
+    "taboo": ["Row", "Paddle", "Boat", "Water", "Long"]
+  },
+  {
+    "word": "ANCHOR",
+    "taboo": ["Boat", "Heavy", "Stop", "Water", "Chain"]
+  },
+  {
+    "word": "SAIL",
+    "taboo": ["Boat", "Wind", "Cloth", "Mast", "Catch"]
+  },
+  {
+    "word": "MAST",
+    "taboo": ["Boat", "Tall", "Pole", "Sail", "Ship"]
+  },
+  {
+    "word": "DECK",
+    "taboo": ["Boat", "Floor", "Stand", "Wood", "Ship"]
+  },
+  {
+    "word": "STERN",
+    "taboo": ["Boat", "Back", "Rear", "Ship", "End"]
+  },
+  {
+    "word": "BOW",
+    "taboo": ["Boat", "Front", "Ship", "Point", "Fore"]
+  },
+  {
+    "word": "HELM",
+    "taboo": ["Boat", "Steer", "Wheel", "Ship", "Captain"]
+  },
+  {
+    "word": "PORTHOLE",
+    "taboo": ["Window", "Ship", "Round", "Boat", "Look"]
+  },
+  {
+    "word": "GANGPLANK",
+    "taboo": ["Board", "Ship", "Walk", "Bridge", "Boat"]
+  },
+  {
+    "word": "BUOY",
+    "taboo": ["Float", "Water", "Mark", "Ocean", "Warning"]
+  },
+  {
+    "word": "LIGHTHOUSE",
+    "taboo": ["Tower", "Light", "Coast", "Ships", "Guide"]
+  },
+  {
+    "word": "PIER",
+    "taboo": ["Dock", "Water", "Walk", "Boats", "Wood"]
+  },
+  {
+    "word": "WHARF",
+    "taboo": ["Dock", "Ships", "Load", "Water", "Platform"]
+  },
+  {
+    "word": "HARBOR",
+    "taboo": ["Port", "Ships", "Water", "Safe", "Dock"]
+  },
+  {
+    "word": "MARINA",
+    "taboo": ["Boats", "Dock", "Harbor", "Yachts", "Water"]
+  },
+  {
+    "word": "YACHT",
+    "taboo": ["Boat", "Luxury", "Rich", "Sail", "Large"]
+  },
+  {
+    "word": "SPEEDBOAT",
+    "taboo": ["Fast", "Water", "Motor", "Zoom", "Boat"]
+  },
+  {
+    "word": "FERRY",
+    "taboo": ["Boat", "Cross", "Transport", "People", "Water"]
+  },
+  {
+    "word": "SUBMARINE",
+    "taboo": ["Underwater", "Navy", "Dive", "Yellow", "Deep"]
+  },
+  {
+    "word": "PERISCOPE",
+    "taboo": ["Look", "Above", "Submarine", "See", "Tube"]
+  },
+  {
+    "word": "PROPELLER",
+    "taboo": ["Spin", "Boat", "Blades", "Push", "Motor"]
+  },
+  {
+    "word": "RUDDER",
+    "taboo": ["Steer", "Boat", "Back", "Turn", "Control"]
+  },
+  {
+    "word": "TILLER",
+    "taboo": ["Steer", "Boat", "Handle", "Small", "Rudder"]
+  },
+  {
+    "word": "RIGGING",
+    "taboo": ["Ropes", "Sail", "Boat", "Support", "Mast"]
+  },
+  {
+    "word": "KEEL",
+    "taboo": ["Boat", "Bottom", "Centerline", "Balance", "Ship"]
+  },
+  {
+    "word": "HULL",
+    "taboo": ["Boat", "Body", "Float", "Shell", "Ship"]
+  },
+  {
+    "word": "CROW'S NEST",
+    "taboo": ["Ship", "High", "Lookout", "Mast", "Pirates"]
+  },
+  {
+    "word": "GALLEY",
+    "taboo": ["Ship", "Kitchen", "Cook", "Boat", "Food"]
+  },
+  {
+    "word": "CABIN",
+    "taboo": ["Room", "Ship", "Sleep", "Small", "Boat"]
+  },
+  {
+    "word": "BUNK BED",
+    "taboo": ["Sleep", "Two", "Stacked", "Ladder", "Ship"]
+  },
+  {
+    "word": "HATCH",
+    "taboo": ["Door", "Ship", "Deck", "Open", "Below"]
+  },
+  {
+    "word": "CARGO HOLD",
+    "taboo": ["Ship", "Store", "Below", "Goods", "Freight"]
+  },
+  {
+    "word": "CLEAT",
+    "taboo": ["Tie", "Rope", "Boat", "Metal", "Dock"]
+  },
+  {
+    "word": "BOLLARD",
+    "taboo": ["Post", "Dock", "Tie", "Ship", "Rope"]
+  },
+  {
+    "word": "FENDER",
+    "taboo": ["Boat", "Protect", "Rubber", "Side", "Bumper"]
+  },
+  {
+    "word": "LIFE PRESERVER",
+    "taboo": ["Ring", "Float", "Save", "Throw", "Emergency"]
+  },
+  {
+    "word": "FLARE",
+    "taboo": ["Signal", "Emergency", "Bright", "Fire", "Help"]
+  },
+  {
+    "word": "FOGHORN",
+    "taboo": ["Sound", "Ship", "Loud", "Warning", "Mist"]
+  },
+  {
+    "word": "RADAR",
+    "taboo": ["Detect", "Ships", "Screen", "Distance", "Technology"]
+  },
+  {
+    "word": "SONAR",
+    "taboo": ["Sound", "Underwater", "Detect", "Submarine", "Echo"]
+  },
+  {
+    "word": "GPS",
+    "taboo": ["Location", "Navigation", "Satellite", "Map", "Device"]
+  },
+  {
+    "word": "CHART",
+    "taboo": ["Map", "Water", "Navigation", "Boat", "Depth"]
+  },
+  {
+    "word": "SEXTANT",
+    "taboo": ["Navigate", "Stars", "Angle", "Old", "Instrument"]
+  },
+  {
+    "word": "CHRONOMETER",
+    "taboo": ["Time", "Accurate", "Clock", "Ship", "Navigate"]
+  },
+  {
+    "word": "LOG",
+    "taboo": ["Record", "Ship", "Speed", "Distance", "Captain"]
+  },
+  {
+    "word": "KNOT",
+    "taboo": ["Speed", "Rope", "Boy Scout", "Nautical", "Mile"]
+  },
+    {
+    "word": "ADELE",
+    "taboo": ["Singer", "Hello", "British", "Powerful", "Voice"]
+  },
+  {
+    "word": "RIHANNA",
+    "taboo": ["Singer", "Barbados", "Umbrella", "Fenty", "Beauty"]
+  },
+  {
+    "word": "DISNEY WORLD",
+    "taboo": ["Florida", "Orlando", "Magic", "Kingdom", "Mickey"]
+  },
+  {
+    "word": "HARRY STYLES",
+    "taboo": ["Singer", "One", "Direction", "Watermelon", "British"]
+  },
+  {
+    "word": "ARIANA GRANDE",
+    "taboo": ["Singer", "Thank", "Next", "Ponytail", "Wicked"]
+  },
+  {
+    "word": "DWAYNE JOHNSON",
+    "taboo": ["Actor", "Rock", "Wrestling", "Bald", "Muscles"]
+  },
+  {
+    "word": "TOM CRUISE",
+    "taboo": ["Actor", "Mission", "Impossible", "Top", "Gun"]
+  },
+  {
+    "word": "YELLOWSTONE",
+    "taboo": ["Park", "Wyoming", "Geyser", "Old", "Faithful"]
+  },
+  {
+    "word": "KEANU REEVES",
+    "taboo": ["Actor", "Matrix", "John", "Wick", "Nice"]
+  },
+  {
+    "word": "CHRIS HEMSWORTH",
+    "taboo": ["Actor", "Thor", "Australian", "Muscles", "Marvel"]
+  },
+  {
+    "word": "LEBRON JAMES",
+    "taboo": ["Basketball", "Lakers", "King", "Cleveland", "Tall"]
+  },
+  {
+    "word": "SPACE NEEDLE",
+    "taboo": ["Seattle", "Tower", "Washington", "Tall", "Restaurant"]
+  },
+  {
+    "word": "TIGER WOODS",
+    "taboo": ["Golf", "Green", "Masters", "Champion", "Comeback"]
+  },
+  {
+    "word": "MOUNT EVEREST",
+    "taboo": ["Tallest", "Mountain", "Climb", "Nepal", "Summit"]
+  },
+  {
+    "word": "EMPIRE STATE BUILDING",
+    "taboo": ["New", "York", "Tall", "Skyscraper", "King"]
+  },
+  {
+    "word": "GOLDEN GATE BRIDGE",
+    "taboo": ["San", "Francisco", "Red", "Suspension", "Fog"]
+  },
+  {
+    "word": "BROOKLYN BRIDGE",
+    "taboo": ["New", "York", "Suspension", "Walk", "East"]
+  }
+]
