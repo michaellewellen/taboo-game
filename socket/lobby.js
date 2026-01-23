@@ -1,16 +1,10 @@
 // socket/lobby.js
 
 let players = [];
-let hostId = null;
 
 module.exports = (io) => {
     io.on('connection', (socket) => {
         console.log('A player connected:', socket.id);
-
-        if (hostId === null) {
-            hostId = socket.id;
-            console.log('Host assigned:', socket.id);
-        }
 
         sendLobbyUpdate();
 
@@ -28,24 +22,14 @@ module.exports = (io) => {
         
         socket.on('disconnect', () => {
             console.log('Player disconnected:', socket.id);
-
             players = players.filter(p => p.id !== socket.id);
-
-            if (socket.id === hostId && players.length > 0) {
-                hostId = players[0].id;
-                console.log('New host assigned:', hostId);
-            } else if (players.length === 0) {
-                hostId = null;
-            }
-
             sendLobbyUpdate();
         });
         
         socket.on('start-game', () => {
-            if (socket.id === hostId) {
-                console.log('Host started the game');
-                io.emit('game-started');
-            }
+            console.log('Someone started the game');
+            // Emit to everyone with player data
+            io.emit('start-game', { players });
         });
     });
 
@@ -55,16 +39,7 @@ module.exports = (io) => {
 
         io.emit('update-lobby', {
             teamA: teamA,
-            teamB: teamB,
-            isHost: false
+            teamB: teamB
         });
-
-        if (hostId) {
-            io.to(hostId).emit('update-lobby', {
-                teamA: teamA,
-                teamB: teamB,
-                isHost: true
-            });
-        }
     }
 };

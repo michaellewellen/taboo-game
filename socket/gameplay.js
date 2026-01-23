@@ -1,0 +1,134 @@
+const Game = require('../classes/Game');
+const Team = require('../classes/Team');
+const Player = require('../classes/Player');
+
+let currentGame = null;
+
+module.exports = (io, pool) => {
+    
+    io.on('connection', (socket) => {
+        
+        // Someone clicks "Start Game" in lobby
+        socket.on('start-game', async (data) => {
+            console.log('Initializing game with players:', data.players);
+            
+            // Create Team objects
+            const teamA = new Team('A');
+            const teamB = new Team('B');
+            
+            const colors = ['pink', 'blue', 'green'];
+            const selectedColor = colors[Math.floor(Math.random() * 3)];
+
+            // Create Player objects and add to teams
+            data.players.forEach(p => {
+                const player = new Player(p.id, p.name, p.team);
+                if (p.team === 'A') {
+                    teamA.addPlayer(player);
+                } else {
+                    teamB.addPlayer(player);
+                }
+            });
+            
+            // Create Game
+            currentGame = new Game(teamA, teamB, selectedColor, pool);
+            await currentGame.loadDeck();
+            
+            // Navigate everyone to game.html
+            io.emit('navigate-to-game');
+            
+            // Start first round
+            await currentGame.startNextRound(io);
+        });
+
+        // Monitoring team clicks "Start Round"
+        socket.on('start-round', () => {
+            if (currentGame && currentGame.currentRound) {
+                currentGame.currentRound.startRound(io);
+            }
+        });
+
+        socket.on('buzzer-pressed', () => {
+            if (currentGame && currentGame.currentRound) {
+                currentGame.currentRound.pauseTimer();
+                io.to(socket.id).emit('show-violation-decision');
+            }
+        });
+
+        socket.on('violation-decision', (data) => {
+            if (currentGame && currentGame.currentRound) {
+                if (data.isViolation) {
+                    const newCard = currentGame.currentRound.handleViolation(io);
+                    emitCard(io, newCard, currentGame.currentRound);
+                } else {
+                    currentGame.currentRound.resumeTimer(io);
+                }
+            }
+        });
+
+        socket.on('correct-answer', () => {
+            if (currentGame && currentGame.currentRound) {
+                const newCard = currentGame.currentRound.handleCorrect(io);
+                emitCard(io, newCard, currentGame.currentRound);
+            }
+        });
+
+        socket.on('pass-card', () => {
+            if (currentGame && currentGame.currentRound) {
+                const newCard = currentGame.currentRound.handlePass(io);
+                emitCard(io, newCard, currentGame.currentRound);
+            }
+        });
+
+        socket.on('recap-done', async () => {
+            if (currentGame) {
+                await currentGame.startNextRound(io);
+            }
+        });
+
+        socket.on('play-again', () => {
+            if (currentGame) {
+                currentGame.playAgain(io);
+                currentGame = null;
+            }
+        });
+        
+    }); 
+};
+
+function emitCard(io, card, round) {
+    const clueGiverId = round.clueGiver.id;
+    const activeTeamIds = round.activeTeam.players.map(p => p.id);
+
+    // Emit to clue giver
+    io.to(clueGiverId).emit('show-card', {
+        word: card.word,
+        tabooWords: card.tabooWords,
+        color: card.color,
+        role: 'clue-giver'
+    });
+
+    // emit to guessers (active team, not cluegiver)
+    activeTeamIds.forEach(id => {
+        if (id !== clueGiverId) {
+            io.to(id).emit('show-waiting', {
+                message: 'Listen and guess!', 
+                clueGiver: round.clueGiver.name
+            });
+        }
+    });
+
+    // emit to opposing team
+    const allPlayers = [...currentGame.teamA.players, ...currentGame.teamB.players];
+    const monitorids = allPlayers
+        .filter(p => p.team !== round.activeTeam.name)
+        .map(p => p.id);
+
+    monitorids.forEach(id => {
+        io.to(id).emit('show-card', {
+            word: card.word,
+            tabooWords: card.tabooWords,
+            color: card.color,
+            role: 'monitor'
+        });
+    });
+}

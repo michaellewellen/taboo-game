@@ -37,7 +37,9 @@ app.use(gameRoutes(gameUrl));  // Fixed typo
 
 // Socket.IO lobby handler
 const lobbyHandler = require('./socket/lobby');
+const gameplayHandler = require('./socket/gameplay');
 lobbyHandler(io);
+gameplayHandler(io, pool);
 
 // Start server
 server.listen(PORT, '0.0.0.0', () => {
@@ -45,3 +47,5 @@ server.listen(PORT, '0.0.0.0', () => {
     console.log(`Game URL: ${gameUrl}`);
     console.log(`Server listening on port ${PORT}\n`);
 });
+
+

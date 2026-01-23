@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <title>Taboo - Game</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="game-container">
+            <!-- Countdown Screen (3, 2, 1, GO!)-->
+            <div id="countdown-screen" style="display: none;">
+                <dif id="countdown-display"></dif>
+            </div>
+
+            <!-- Timer Display (always visible during round) -->
+            <div id="timer-display">
+                <span id="timer-text">60</span>
+            </div>
+
+            <!-- Score Display (always visible during round) -->
+            <div id="score-display">
+                <span class="team-name">Team A</span>
+                <span id="team-a-score">0</span>
+            </div>
+            <div id="score-display">
+                <span class="team-name">Team B</span>
+                <span id="team-b-score">0</span>
+            </div>
+
+            <!-- Card Display (for clue giver and monitors)-->
+            <div id="card-display" style="display: none;">
+                <div id="card" class="card">
+                    <div id="card-word" class="word"></div>
+                    <div id="taboo-words" class="taboo-list"></div>
+                </div>
+
+                <!-- Clue-giver controls -->
+                <div id="clue-giver-controls" style="display: none;">
+                    <button id="pass-btn" class="game-btn">PASS</button>
+                </div>
+
+                <div id="monitor-controls" style="display: none;">
+                    <button id="buzzer-btn" class="game-btn buzzer">BUZZER</button>
+                    <button id="correct-btn" class="game-btn correct">CORRECT</button>
+                    <button id="start-round-btn" class="game-btn start">START ROUND</button>
+                </div>
+            </div>
+
+            <!-- waiting Screeen (for guessers)-->
+            <div id="waiting-screen" style="display: none;">
+                <h2>Listen and Guess!</h2>
+                <p id="waiting-message"></p>
+            </div>
+
+            <!-- Violation Decision (for buzzer presser) -->
+            <div id="violation-decision" style="display: none;">
+                <h2>Was it a violation?</h2>
+                <button id="violation-yes" class="game-btn">VIOLATION</button>
+                <button id="violation-no" class="game-btn">NO VIOLATION</button>
+            </div>
+
+            <!-- Recap Screen -->
+            <div id="recap-screen" style="display: none;">
+                <h2>Round Complete!</h2>
+                <div id="recap-cards"></div>
+                <div id="recap-score"></div>
+                <button id="continue-btn" class="game-btn">CONTINUE</button>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div id="game-over-screen" style="display: none;">
+                <h1 id="winner-text"></h1>
+                <div id="final-scores"></div>
+                <button id="play-again-btn" class="game-btn">PLAY AGAIN</button>
+            </div>
+        </div>
+        <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+        <script src="game.js"></script>
+    </body>
+</html>
