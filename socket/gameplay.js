@@ -4,14 +4,16 @@ const Player = require('../classes/Player');
 
 let currentGame = null;
 
+let gameStarted = false;
+
 module.exports = (io, pool, lobby) => {
-    
+
     io.on('connection', (socket) => {
-        
+
         // Someone clicks "Start Game" in lobby
         socket.on('start-game', async () => {
             if (gameStarted) return;
-            gamestarted = true;
+            gameStarted = true;
 
             const players = lobby.getPlayers();
             console.log('Initializing game with players:', players);

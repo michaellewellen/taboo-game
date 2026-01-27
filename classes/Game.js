@@ -110,7 +110,7 @@ class Game {
 
         const clueGiver = this.getNextClueGiver();
 
-        const isTeamATurn = this.teamAStartsFirst
+        const isTeamATurn = this.teamAstartFirst
             ? (this.currentRoundNumber % 2 === 0)
             : (this.currentRoundNumber % 2 === 1);
 

@@ -91,12 +91,11 @@ socket.on('update-lobby', (data) => {
     }
 })
 
-startGameBtn.addEventListener('click', () =>{
+startGameBtn.addEventListener('click', () => {
     socket.emit('start-game');
+});
 
 socket.on('navigate-to-game', () => {
     console.log('Navigating to game...');
     window.location.href = '/game.html';
-});
-
 });
