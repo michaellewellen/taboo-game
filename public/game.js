@@ -117,7 +117,7 @@ socket.on('show-recap', (data) => {
     recapCards.innerHTML = '';
     data.cardHistory.forEach(item => {
         const div = document.createElement('div');
-        div.className = `recap-card ${item.results}`;
+        div.className = `recap-card ${item.result}`;
 
         let symbol = '';
         if (item.result === 'correct') symbol = '✓';

@@ -96,6 +96,7 @@ module.exports = (io, pool, lobby) => {
             if (currentGame) {
                 currentGame.playAgain(io);
                 currentGame = null;
+                gameStarted = false;
             }
         });
         

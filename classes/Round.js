@@ -102,7 +102,7 @@ class Round {
     handleViolation(io) {
         this.cardHistory.push({
             card: this.currentCard, 
-            rsult: 'violation'
+            result: 'violation'
         });
         this.roundScore--;
         this.drawCard();
