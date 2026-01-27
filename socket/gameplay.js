@@ -50,7 +50,10 @@ module.exports = (io, pool, lobby) => {
         // Monitoring team clicks "Start Round"
         socket.on('start-round', () => {
             if (currentGame && currentGame.currentRound) {
-                currentGame.currentRound.startRound(io);
+                currentGame.currentRound.startRound(io, (card) => {
+                    // After countdown, emit card to all players
+                    emitCard(io, card, currentGame.currentRound);
+                });
             }
         });
 

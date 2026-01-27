@@ -121,9 +121,26 @@ class Game {
 
         this.currentRoundNumber ++;
 
+        // Notify clue giver they are giving clues this round
+        io.to(clueGiver.id).emit('show-waiting', {
+            message: `You are the clue giver! Wait for the opposing team to start the round.`,
+            clueGiver: clueGiver.name
+        });
+
+        // Notify active team guessers to wait
+        activeTeam.players.forEach(player => {
+            if (player.id !== clueGiver.id) {
+                io.to(player.id).emit('show-waiting', {
+                    message: `${clueGiver.name} is giving clues this round. Wait for the round to start.`,
+                    clueGiver: clueGiver.name
+                });
+            }
+        });
+
+        // Notify monitoring team - they get the start button
         monitoringTeam.players.forEach(player => {
             io.to(player.id).emit('show-start-button', {
-                clueGiver: clueGiver.name, 
+                clueGiver: clueGiver.name,
                 round: this.currentRoundNumber
             });
         });

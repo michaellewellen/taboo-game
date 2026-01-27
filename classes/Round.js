@@ -14,7 +14,7 @@ class Round {
         this.isPaused = false;
     }
 
-    startRound(io) {
+    startRound(io, onCardReady) {
         setTimeout(() => {
             io.emit('countdown', { count: 3 });
         }, 0);
@@ -31,7 +31,11 @@ class Round {
             io.emit('countdown', { count: 'GO!' });
             this.drawCard();
             this.startTimer(io);
-        }, 3000)    
+            // Call the callback with the current card so it can be emitted to players
+            if (onCardReady) {
+                onCardReady(this.currentCard);
+            }
+        }, 3000);
     }
 
     drawCard() {
@@ -127,20 +131,25 @@ class Round {
         clearInterval(this.timerInterval);
         this.timerInterval = null;
 
-        if (this.currentCard && this.timeRemaining <=0) {
+        if (this.currentCard && this.timeRemaining <= 0) {
             this.cardHistory.push({
                 card: this.currentCard,
                 result: 'timeout'
-            })
+            });
         }
         this.activeTeam.addScore(this.roundScore);
 
-        return {
+        const recapData = {
             clueGiver: this.clueGiver,
-            cardHistory: this.cardHistory, 
+            cardHistory: this.cardHistory,
             roundScore: this.roundScore,
             teamScore: this.activeTeam.score
         };
+
+        // Emit recap to all players
+        io.emit('show-recap', recapData);
+
+        return recapData;
     }
 }
 module.exports = Round;
