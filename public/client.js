@@ -84,12 +84,19 @@ socket.on('update-lobby', (data) => {
     });
     teamBCount.textContent = data.teamB.length;
 
-    if(data.isHost){
-        isHost = true;
-        startGameBtn.style.display = 'block';
+    if(data.teamA.length >= 2 && data.teamB.length >= 2){
+    startGameBtn.style.display = 'block';
+    } else {
+    startGameBtn.style.display = 'none';
     }
 })
 
 startGameBtn.addEventListener('click', () =>{
     socket.emit('start-game');
+
+socket.on('navigate-to-game', () => {
+    console.log('Navigating to game...');
+    window.location.href = '/game.html';
+});
+
 });

@@ -26,11 +26,6 @@ module.exports = (io) => {
             sendLobbyUpdate();
         });
         
-        socket.on('start-game', () => {
-            console.log('Someone started the game');
-            // Emit to everyone with player data
-            io.emit('start-game', { players });
-        });
     });
 
     function sendLobbyUpdate() {
@@ -42,4 +37,6 @@ module.exports = (io) => {
             teamB: teamB
         });
     }
+
+    return { getPlayers: () => players };
 };

@@ -38,8 +38,9 @@ app.use(gameRoutes(gameUrl));  // Fixed typo
 // Socket.IO lobby handler
 const lobbyHandler = require('./socket/lobby');
 const gameplayHandler = require('./socket/gameplay');
-lobbyHandler(io);
-gameplayHandler(io, pool);
+
+const lobby = lobbyHandler(io);
+gameplayHandler(io, pool, lobby);
 
 // Start server
 server.listen(PORT, '0.0.0.0', () => {

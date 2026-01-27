@@ -34,7 +34,7 @@ class Game {
     async loadDeck() {
         try {
             const result = await this.pool.query(
-                'SELECT * FROM taboo_cards WHERE color = $1 AND used = false'
+                'SELECT * FROM taboo_cards WHERE color = $1 AND used = false',
                 [this.selectedColor]
             );
             this.deck = result.rows.map(row =>
@@ -52,14 +52,14 @@ class Game {
 
     getNextClueGiver() {
         let isTeamATurn;
-        if (this.teamAStartsFirst) {
+        if (this.teamAstartFirst) {
             isTeamATurn = (this.currentRoundNumber % 2 === 0);
         } else {
             isTeamATurn = (this.currentRoundNumber % 2 === 1);
         }
 
         if(isTeamATurn) {
-            const player = this.teamARotational[this.teamAindex];
+            const player = this.teamARotation[this.teamAIndex];
             this.teamAIndex++;
 
             if (this.teamAIndex >= this.teamARotation.length) {
@@ -68,7 +68,7 @@ class Game {
             }
             return player;
         } else  {
-            const player = this.teamBRotational[this.teamBIndex];
+            const player = this.teamBRotation[this.teamBIndex];
             this.teamBIndex++;
 
             if (this.teamBIndex >= this.teamBRotation.length) {
@@ -80,7 +80,7 @@ class Game {
     }
 
     async checkDeckStatus() {
-        const result = await this.poolquery(
+        const result = await this.pool.query(
             'SELECT COUNT(*) FROM taboo_cards WHERE color = $1 AND used = false',
             [this.selectedColor]
         );
@@ -88,7 +88,7 @@ class Game {
         const availableCards = parseInt(result.rows[0].count);
 
         if (availableCards < 10) {
-            console.log(`Only ${availableCards} cards left - resetting ${this.selectedcolor} deck`);
+            console.log(`Only ${availableCards} cards left - resetting ${this.selectedColor} deck`);
             await this.pool.query(
                 'UPDATE taboo_cards SET used = false WHERE color = $1',
                 [this.selectedColor]

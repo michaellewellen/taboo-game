@@ -4,13 +4,17 @@ const Player = require('../classes/Player');
 
 let currentGame = null;
 
-module.exports = (io, pool) => {
+module.exports = (io, pool, lobby) => {
     
     io.on('connection', (socket) => {
         
         // Someone clicks "Start Game" in lobby
-        socket.on('start-game', async (data) => {
-            console.log('Initializing game with players:', data.players);
+        socket.on('start-game', async () => {
+            if (gameStarted) return;
+            gamestarted = true;
+
+            const players = lobby.getPlayers();
+            console.log('Initializing game with players:', players);
             
             // Create Team objects
             const teamA = new Team('A');
@@ -20,7 +24,7 @@ module.exports = (io, pool) => {
             const selectedColor = colors[Math.floor(Math.random() * 3)];
 
             // Create Player objects and add to teams
-            data.players.forEach(p => {
+            players.forEach(p => {
                 const player = new Player(p.id, p.name, p.team);
                 if (p.team === 'A') {
                     teamA.addPlayer(player);
@@ -34,6 +38,7 @@ module.exports = (io, pool) => {
             await currentGame.loadDeck();
             
             // Navigate everyone to game.html
+            console.log('About to emit navigate-to-game to all clients');
             io.emit('navigate-to-game');
             
             // Start first round
