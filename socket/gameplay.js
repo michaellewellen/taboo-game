@@ -5,10 +5,35 @@ const Player = require('../classes/Player');
 let currentGame = null;
 
 let gameStarted = false;
+let expectedPlayerCount = 0;
+let readyPlayers = new Set();
 
 module.exports = (io, pool, lobby) => {
 
     io.on('connection', (socket) => {
+
+        // Player connected to game.html and is identifying themselves
+        socket.on('player-ready', (data) => {
+            if (!currentGame) return;
+
+            console.log(`Player ready: ${data.name} (${data.team}) with new socket ${socket.id}`);
+
+            // Find and update the player's socket ID in the game
+            const team = data.team === 'A' ? currentGame.teamA : currentGame.teamB;
+            const player = team.players.find(p => p.name === data.name);
+
+            if (player) {
+                player.id = socket.id;  // Update to new socket ID
+                readyPlayers.add(data.name);
+                console.log(`Updated ${data.name}'s socket ID. Ready: ${readyPlayers.size}/${expectedPlayerCount}`);
+
+                // Once all players are ready, start the first round
+                if (readyPlayers.size === expectedPlayerCount) {
+                    console.log('All players ready! Starting first round...');
+                    currentGame.startNextRound(io);
+                }
+            }
+        });
 
         // Someone clicks "Start Game" in lobby
         socket.on('start-game', async () => {
@@ -17,11 +42,14 @@ module.exports = (io, pool, lobby) => {
 
             const players = lobby.getPlayers();
             console.log('Initializing game with players:', players);
-            
+
+            expectedPlayerCount = players.length;
+            readyPlayers = new Set();
+
             // Create Team objects
             const teamA = new Team('A');
             const teamB = new Team('B');
-            
+
             const colors = ['pink', 'blue', 'green'];
             const selectedColor = colors[Math.floor(Math.random() * 3)];
 
@@ -34,17 +62,15 @@ module.exports = (io, pool, lobby) => {
                     teamB.addPlayer(player);
                 }
             });
-            
+
             // Create Game
             currentGame = new Game(teamA, teamB, selectedColor, pool);
             await currentGame.loadDeck();
-            
+
             // Navigate everyone to game.html
+            // startNextRound will be called once all players emit 'player-ready'
             console.log('About to emit navigate-to-game to all clients');
             io.emit('navigate-to-game');
-            
-            // Start first round
-            await currentGame.startNextRound(io);
         });
 
         // Monitoring team clicks "Start Round"

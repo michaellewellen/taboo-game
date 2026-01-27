@@ -41,6 +41,10 @@ joinTeamABtn.addEventListener('click', ()=>{
     playerName = name;
     playerTeam = 'A';
 
+    // Store in localStorage so game.html can identify this player
+    localStorage.setItem('playerName', playerName);
+    localStorage.setItem('playerTeam', 'A');
+
     socket.emit('join-team', { name: playerName, team: 'A' });
 
     nameEntry.style.display = 'none';
@@ -57,6 +61,10 @@ joinTeamBBtn.addEventListener('click', ()=>{
 
     playerName = name;
     playerTeam = 'B';
+
+    // Store in localStorage so game.html can identify this player
+    localStorage.setItem('playerName', playerName);
+    localStorage.setItem('playerTeam', 'B');
 
     socket.emit('join-team', { name: playerName, team: 'B' });
 

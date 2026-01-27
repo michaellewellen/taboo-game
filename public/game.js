@@ -1,5 +1,14 @@
 const socket = io();
 
+// When connected, identify this player to the server with new socket ID
+socket.on('connect', () => {
+    const playerName = localStorage.getItem('playerName');
+    const playerTeam = localStorage.getItem('playerTeam');
+    if (playerName && playerTeam) {
+        socket.emit('player-ready', { name: playerName, team: playerTeam });
+    }
+});
+
 const countdownScreen = document.getElementById('countdown-screen');
 const countdownDisplay = document.getElementById('countdown-display');
 const timerText = document.getElementById('timer-text');
