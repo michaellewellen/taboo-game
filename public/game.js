@@ -2,15 +2,15 @@ const socket = io();
 
 // When connected, identify this player to the server with new socket ID
 socket.on('connect', () => {
-    const playerName = localStorage.getItem('playerName');
-    const playerTeam = localStorage.getItem('playerTeam');
+    const playerName = sessionStorage.getItem('playerName');
+    const playerTeam = sessionStorage.getItem('playerTeam');
     console.log(`[game.js] Connected with socket ID: ${socket.id}`);
-    console.log(`[game.js] localStorage - playerName: ${playerName}, playerTeam: ${playerTeam}`);
+    console.log(`[game.js] sessionStorage - playerName: ${playerName}, playerTeam: ${playerTeam}`);
     if (playerName && playerTeam) {
         console.log(`[game.js] Emitting player-ready for ${playerName} on Team ${playerTeam}`);
         socket.emit('player-ready', { name: playerName, team: playerTeam });
     } else {
-        console.log(`[game.js] ERROR: Missing playerName or playerTeam in localStorage!`);
+        console.log(`[game.js] ERROR: Missing playerName or playerTeam in sessionStorage!`);
     }
 });
 
