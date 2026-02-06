@@ -14,24 +14,32 @@ module.exports = (io, pool, lobby) => {
 
         // Player connected to game.html and is identifying themselves
         socket.on('player-ready', (data) => {
-            if (!currentGame) return;
+            console.log(`[player-ready] Received from ${data.name} (Team ${data.team}), socket: ${socket.id}`);
+            console.log(`[player-ready] currentGame exists: ${!!currentGame}, gameStarted: ${gameStarted}`);
 
-            console.log(`Player ready: ${data.name} (${data.team}) with new socket ${socket.id}`);
+            if (!currentGame) {
+                console.log(`[player-ready] ERROR: No currentGame! Cannot process player-ready.`);
+                return;
+            }
 
             // Find and update the player's socket ID in the game
             const team = data.team === 'A' ? currentGame.teamA : currentGame.teamB;
+            console.log(`[player-ready] Looking for ${data.name} in Team ${data.team}. Team has ${team.players.length} players:`, team.players.map(p => p.name));
+
             const player = team.players.find(p => p.name === data.name);
 
             if (player) {
                 player.id = socket.id;  // Update to new socket ID
                 readyPlayers.add(data.name);
-                console.log(`Updated ${data.name}'s socket ID. Ready: ${readyPlayers.size}/${expectedPlayerCount}`);
+                console.log(`[player-ready] Updated ${data.name}'s socket ID. Ready: ${readyPlayers.size}/${expectedPlayerCount}`);
 
                 // Once all players are ready, start the first round
                 if (readyPlayers.size === expectedPlayerCount) {
-                    console.log('All players ready! Starting first round...');
+                    console.log('[player-ready] All players ready! Starting first round...');
                     currentGame.startNextRound(io);
                 }
+            } else {
+                console.log(`[player-ready] ERROR: Could not find player ${data.name} in Team ${data.team}!`);
             }
         });
 
@@ -125,6 +133,10 @@ module.exports = (io, pool, lobby) => {
             if (currentGame) {
                 currentGame.playAgain(io);
                 currentGame = null;
+                // Reset game state so a new game can be started
+                gameStarted = false;
+                readyPlayers = new Set();
+                expectedPlayerCount = 0;
             }
         });
         

@@ -4,8 +4,13 @@ const socket = io();
 socket.on('connect', () => {
     const playerName = localStorage.getItem('playerName');
     const playerTeam = localStorage.getItem('playerTeam');
+    console.log(`[game.js] Connected with socket ID: ${socket.id}`);
+    console.log(`[game.js] localStorage - playerName: ${playerName}, playerTeam: ${playerTeam}`);
     if (playerName && playerTeam) {
+        console.log(`[game.js] Emitting player-ready for ${playerName} on Team ${playerTeam}`);
         socket.emit('player-ready', { name: playerName, team: playerTeam });
+    } else {
+        console.log(`[game.js] ERROR: Missing playerName or playerTeam in localStorage!`);
     }
 });
 
