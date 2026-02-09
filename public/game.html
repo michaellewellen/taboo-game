@@ -44,18 +44,24 @@
                     <button id="pass-btn" class="game-btn pass">PASS</button>
                 </div>
 
-                <!-- Monitor controls -->
+                <!-- Monitor controls (during active round) -->
                 <div id="monitor-controls" style="display: none;">
                     <button id="buzzer-btn" class="game-btn buzzer">BUZZER</button>
                     <button id="correct-btn" class="game-btn correct">CORRECT</button>
-                    <button id="start-round-btn" class="game-btn start">START ROUND</button>
                 </div>
             </div>
 
-            <!-- Waiting Screen (for guessers) -->
+            <!-- Waiting Screen (for clue giver and guessers before/during round) -->
             <div id="waiting-screen" style="display: none;">
-                <h2>Listen and Guess!</h2>
+                <h2 id="waiting-title">Listen and Guess!</h2>
                 <p id="waiting-message"></p>
+            </div>
+
+            <!-- Ready Screen (for opposing team to start the round) -->
+            <div id="ready-screen" style="display: none;">
+                <h2>Round <span id="round-number">1</span></h2>
+                <p id="ready-message">Waiting to start...</p>
+                <button id="start-round-btn-main" class="game-btn start">START ROUND</button>
             </div>
 
             <!-- Violation Decision (for buzzer presser) -->

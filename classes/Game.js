@@ -38,12 +38,16 @@ class Game {
                 [this.selectedColor]
             );
             this.deck = result.rows.map(row =>
-                new Card(row.id, row.word, 
+                new Card(row.id, row.word,
                     [row.taboo_word_1, row.taboo_word_2, row.taboo_word_3,
                         row.taboo_word_4, row.taboo_word_5],
                         row.color)
                     );
-            
+
+            // Shuffle the deck so cards come in random order
+            this.deck = this.shuffleArray(this.deck);
+            console.log(`Loaded and shuffled ${this.deck.length} cards`);
+
         } catch(err) {
             console.error('Error loading deck:', err);
             return 0;
@@ -119,20 +123,25 @@ class Game {
 
         this.currentRound = new Round(clueGiver, activeTeam, this.deck);
 
-        this.currentRoundNumber ++;
+        this.currentRoundNumber++;
+
+        // Send score update to all players
+        io.emit('score-update', {
+            teamAScore: this.teamA.score,
+            teamBScore: this.teamB.score
+        });
 
         // Notify clue giver they are giving clues this round
         io.to(clueGiver.id).emit('show-waiting', {
             message: `You are the clue giver! Wait for the opposing team to start the round.`,
-            clueGiver: clueGiver.name
+            isClueGiver: true
         });
 
         // Notify active team guessers to wait
         activeTeam.players.forEach(player => {
             if (player.id !== clueGiver.id) {
                 io.to(player.id).emit('show-waiting', {
-                    message: `${clueGiver.name} is giving clues this round. Wait for the round to start.`,
-                    clueGiver: clueGiver.name
+                    message: `${clueGiver.name} is giving clues this round. Wait for the round to start.`
                 });
             }
         });
