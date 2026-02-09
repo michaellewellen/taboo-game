@@ -106,9 +106,9 @@ module.exports = (io, pool, lobby) => {
                 if (data.isViolation) {
                     const newCard = currentGame.currentRound.handleViolation(io);
                     emitCard(io, newCard, currentGame.currentRound);
-                } else {
-                    currentGame.currentRound.resumeTimer(io);
                 }
+                // Always resume timer after violation decision (whether yes or no)
+                currentGame.currentRound.resumeTimer(io);
             }
         });
 

@@ -77,15 +77,20 @@ class Round {
     }
 
     resumeTimer(io) {
+        // Safety: clear any existing interval first
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+
         this.isPaused = false;
         this.startTime = Date.now() - ((60 - this.timeRemaining) * 1000);  // Adjust start time
-        
+
         this.timerInterval = setInterval(() => {
             const elapsed = Date.now() - this.startTime;
             this.timeRemaining = 60 - (elapsed / 1000);
-            
+
             io.emit('timer-update', { time: Math.ceil(this.timeRemaining) });
-            
+
             if (this.timeRemaining <= 0) {
                 this.endRound(io);
             }
