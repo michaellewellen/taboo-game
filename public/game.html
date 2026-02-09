@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset = "UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Taboo - Game</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="game-container">
-            <!-- Countdown Screen (3, 2, 1, GO!)-->
+            <!-- Countdown Screen (3, 2, 1, GO!) -->
             <div id="countdown-screen" style="display: none;">
-                <dif id="countdown-display"></dif>
+                <div id="countdown-display"></div>
             </div>
 
-            <!-- Timer Display (always visible during round) -->
+            <!-- Timer Display - Pie Chart -->
             <div id="timer-display">
-                <span id="timer-text">60</span>
+                <div class="pie-timer" id="pie-timer">
+                    <span class="pie-timer-text" id="timer-text">60</span>
+                </div>
             </div>
 
-            <!-- Score Display (always visible during round) -->
-            <div id="score-display">
-                <span class="team-name">Team A</span>
-                <span id="team-a-score">0</span>
-            </div>
-            <div id="score-display">
-                <span class="team-name">Team B</span>
-                <span id="team-b-score">0</span>
+            <!-- Score Display -->
+            <div id="scores-container">
+                <div class="score-display">
+                    <span class="team-name">Team A</span>
+                    <span class="score" id="team-a-score">0</span>
+                </div>
+                <div class="score-display">
+                    <span class="team-name">Team B</span>
+                    <span class="score" id="team-b-score">0</span>
+                </div>
             </div>
 
-            <!-- Card Display (for clue giver and monitors)-->
+            <!-- Card Display (for clue giver and monitors) -->
             <div id="card-display" style="display: none;">
                 <div id="card" class="card">
                     <div id="card-word" class="word"></div>
-                    <div id="taboo-words" class="taboo-list"></div>
+                    <ul id="taboo-words" class="taboo-list"></ul>
                 </div>
 
                 <!-- Clue-giver controls -->
                 <div id="clue-giver-controls" style="display: none;">
-                    <button id="pass-btn" class="game-btn">PASS</button>
+                    <button id="pass-btn" class="game-btn pass">PASS</button>
                 </div>
 
+                <!-- Monitor controls -->
                 <div id="monitor-controls" style="display: none;">
                     <button id="buzzer-btn" class="game-btn buzzer">BUZZER</button>
                     <button id="correct-btn" class="game-btn correct">CORRECT</button>
@@ -47,7 +52,7 @@
                 </div>
             </div>
 
-            <!-- waiting Screeen (for guessers)-->
+            <!-- Waiting Screen (for guessers) -->
             <div id="waiting-screen" style="display: none;">
                 <h2>Listen and Guess!</h2>
                 <p id="waiting-message"></p>
@@ -56,8 +61,8 @@
             <!-- Violation Decision (for buzzer presser) -->
             <div id="violation-decision" style="display: none;">
                 <h2>Was it a violation?</h2>
-                <button id="violation-yes" class="game-btn">VIOLATION</button>
-                <button id="violation-no" class="game-btn">NO VIOLATION</button>
+                <button id="violation-yes" class="game-btn">YES</button>
+                <button id="violation-no" class="game-btn">NO</button>
             </div>
 
             <!-- Recap Screen -->

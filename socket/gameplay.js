@@ -33,6 +33,9 @@ module.exports = (io, pool, lobby) => {
                 readyPlayers.add(data.name);
                 console.log(`[player-ready] Updated ${data.name}'s socket ID. Ready: ${readyPlayers.size}/${expectedPlayerCount}`);
 
+                // Send the session color to this player
+                io.to(socket.id).emit('set-theme', { color: currentGame.selectedColor });
+
                 // Once all players are ready, start the first round
                 if (readyPlayers.size === expectedPlayerCount) {
                     console.log('[player-ready] All players ready! Starting first round...');

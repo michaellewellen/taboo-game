@@ -1,5 +1,9 @@
 const socket = io();
 
+// Pie timer element
+const pieTimer = document.getElementById('pie-timer');
+const TOTAL_TIME = 60;
+
 // When connected, identify this player to the server with new socket ID
 socket.on('connect', () => {
     const playerName = sessionStorage.getItem('playerName');
@@ -12,6 +16,12 @@ socket.on('connect', () => {
     } else {
         console.log(`[game.js] ERROR: Missing playerName or playerTeam in sessionStorage!`);
     }
+});
+
+// Handle theme color from server
+socket.on('set-theme', (data) => {
+    console.log(`[game.js] Setting theme color: ${data.color}`);
+    document.body.className = `theme-${data.color}`;
 });
 
 const countdownScreen = document.getElementById('countdown-screen');
@@ -85,6 +95,12 @@ socket.on('countdown', (data) => {
 
 socket.on('timer-update', (data) => {
     timerText.textContent = data.time;
+
+    // Update pie chart progress
+    const progress = (data.time / TOTAL_TIME) * 100;
+    if (pieTimer) {
+        pieTimer.style.setProperty('--progress', `${progress}%`);
+    }
 });
 
 socket.on('show-card', (data) => {
@@ -131,7 +147,7 @@ socket.on('show-recap', (data) => {
     recapCards.innerHTML = '';
     data.cardHistory.forEach(item => {
         const div = document.createElement('div');
-        div.className = `recap-card ${item.results}`;
+        div.className = `recap-card ${item.result}`;
 
         let symbol = '';
         if (item.result === 'correct') symbol = '✓';
