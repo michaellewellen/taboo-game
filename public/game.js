@@ -4,6 +4,37 @@ const socket = io();
 const pieTimer = document.getElementById('pie-timer');
 const TOTAL_TIME = 60;
 
+// Sound effects
+const sounds = {
+    countdownBeep: new Audio('countdown-beep.mp3'),
+    countdownGo: new Audio('countdown-go.mp3'),
+    buzzer: new Audio('buzzer.mp3'),
+    correct: new Audio('correct.mp3'),
+    swoosh: new Audio('swoosh.mp3'),
+    timerWarning: new Audio('timer-warning.mp3')
+};
+
+// Track if timer warning has started (so we don't restart it)
+let timerWarningStarted = false;
+
+// Helper function to play sounds
+function playSound(soundName) {
+    const sound = sounds[soundName];
+    if (sound) {
+        sound.currentTime = 0;  // Reset to start
+        sound.play().catch(err => console.log('Sound play error:', err));
+    }
+}
+
+// Stop a specific sound
+function stopSound(soundName) {
+    const sound = sounds[soundName];
+    if (sound) {
+        sound.pause();
+        sound.currentTime = 0;
+    }
+}
+
 // When connected, identify this player to the server with new socket ID
 socket.on('connect', () => {
     const playerName = sessionStorage.getItem('playerName');
@@ -103,6 +134,14 @@ socket.on('countdown', (data) => {
     countdownDisplay.classList.remove('countdown-number');
     void countdownDisplay.offsetWidth;
     countdownDisplay.classList.add('countdown-number');
+
+    // Play countdown sounds
+    if (data.count === 3 || data.count === 2 || data.count === 1) {
+        playSound('countdownBeep');
+    } else if (data.count === 'GO!') {
+        playSound('countdownGo');
+        timerWarningStarted = false;  // Reset for new round
+    }
 });
 
 socket.on('timer-update', (data) => {
@@ -113,11 +152,26 @@ socket.on('timer-update', (data) => {
     if (pieTimer) {
         pieTimer.style.setProperty('--progress', `${progress}%`);
     }
+
+    // Start timer warning sound at 10 seconds
+    if (data.time === 10 && !timerWarningStarted) {
+        timerWarningStarted = true;
+        playSound('timerWarning');
+    }
+
+    // Play buzzer when time runs out
+    if (data.time === 0) {
+        stopSound('timerWarning');
+        playSound('buzzer');
+    }
 });
 
 socket.on('show-card', (data) => {
     hideAllScreens();
     cardDisplay.style.display = 'block';
+
+    // Play card flip/swoosh sound
+    playSound('swoosh');
 
     cardWord.textContent = data.word;
     tabooWords.innerHTML = '';
@@ -157,6 +211,7 @@ socket.on('show-violation-decision', () => {
 
 socket.on('show-recap', (data) => {
     hideAllScreens();
+    stopSound('timerWarning');  // Make sure timer warning is stopped
     recapScreen.style.display = 'flex';
 
     recapCards.innerHTML = '';
@@ -205,14 +260,18 @@ startRoundBtnMain.addEventListener('click', () => {
 });
 
 buzzerBtn.addEventListener('click', () => {
+    playSound('buzzer');
+    stopSound('timerWarning');  // Stop timer warning if playing
     socket.emit('buzzer-pressed');
 });
 
 correctBtn.addEventListener('click', () => {
+    playSound('correct');
     socket.emit('correct-answer');
 });
 
 passBtn.addEventListener('click', () => {
+    playSound('swoosh');
     socket.emit('pass-card');
 });
 
