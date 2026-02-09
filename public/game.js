@@ -24,6 +24,7 @@ socket.on('set-theme', (data) => {
     document.body.className = `theme-${data.color}`;
 });
 
+// DOM Elements
 const countdownScreen = document.getElementById('countdown-screen');
 const countdownDisplay = document.getElementById('countdown-display');
 const timerText = document.getElementById('timer-text');
@@ -40,10 +41,15 @@ const passBtn = document.getElementById('pass-btn');
 const monitorControls = document.getElementById('monitor-controls');
 const buzzerBtn = document.getElementById('buzzer-btn');
 const correctBtn = document.getElementById('correct-btn');
-const startRoundBtn = document.getElementById('start-round-btn');
 
 const waitingScreen = document.getElementById('waiting-screen');
+const waitingTitle = document.getElementById('waiting-title');
 const waitingMessage = document.getElementById('waiting-message');
+
+const readyScreen = document.getElementById('ready-screen');
+const roundNumber = document.getElementById('round-number');
+const readyMessage = document.getElementById('ready-message');
+const startRoundBtnMain = document.getElementById('start-round-btn-main');
 
 const violationDecision = document.getElementById('violation-decision');
 const violationYes = document.getElementById('violation-yes');
@@ -63,6 +69,7 @@ function hideAllScreens() {
     countdownScreen.style.display = 'none';
     cardDisplay.style.display = 'none';
     waitingScreen.style.display = 'none';
+    readyScreen.style.display = 'none';
     violationDecision.style.display = 'none';
     recapScreen.style.display = 'none';
     gameOverScreen.style.display = 'none';
@@ -74,13 +81,18 @@ socket.on('navigate-to-game', () => {
     window.location.href = '/game.html';
 });
 
+// Score update handler
+socket.on('score-update', (data) => {
+    teamAScore.textContent = data.teamAScore;
+    teamBScore.textContent = data.teamBScore;
+});
+
+// Opposing team sees this - clean screen with start button
 socket.on('show-start-button', (data) => {
     hideAllScreens();
-    cardDisplay.style.display = 'block';
-    monitorControls.style.display = 'block';
-    startRoundBtn.style.display = 'block';
-    buzzerBtn.style.display = 'none'
-    correctBtn.style.display = 'none';
+    readyScreen.style.display = 'flex';
+    roundNumber.textContent = data.round;
+    readyMessage.textContent = `${data.clueGiver} is giving clues. Press START when ready!`;
 });
 
 socket.on('countdown', (data) => {
@@ -124,15 +136,18 @@ socket.on('show-card', (data) => {
     } else if (data.role === 'monitor') {
         monitorControls.style.display = 'block';
         clueGiverControls.style.display = 'none';
-        startRoundBtn.style.display = 'none';
-        buzzerBtn.style.display = 'block';
-        correctBtn.style.display = 'block';
     }
 });
 
 socket.on('show-waiting', (data) => {
     hideAllScreens();
     waitingScreen.style.display = 'flex';
+
+    if (data.isClueGiver) {
+        waitingTitle.textContent = 'You Are The Clue Giver!';
+    } else {
+        waitingTitle.textContent = 'Listen and Guess!';
+    }
     waitingMessage.textContent = data.message;
 });
 
@@ -142,7 +157,7 @@ socket.on('show-violation-decision', () => {
 
 socket.on('show-recap', (data) => {
     hideAllScreens();
-    recapScreen.style.display = 'block';
+    recapScreen.style.display = 'flex';
 
     recapCards.innerHTML = '';
     data.cardHistory.forEach(item => {
@@ -183,9 +198,10 @@ socket.on('navigate-to-lobby', () => {
     window.location.href = '/lobby.html';
 });
 
-startRoundBtn.addEventListener('click', () => {
+// Button event listeners
+startRoundBtnMain.addEventListener('click', () => {
     socket.emit('start-round');
-    startRoundBtn.style.display = 'none';
+    readyScreen.style.display = 'none';
 });
 
 buzzerBtn.addEventListener('click', () => {
@@ -206,7 +222,7 @@ violationYes.addEventListener('click', () => {
 });
 
 violationNo.addEventListener('click', () => {
-    socket.emit('violation-decision', {isViolation: false });
+    socket.emit('violation-decision', { isViolation: false });
     violationDecision.style.display = 'none';
 });
 
