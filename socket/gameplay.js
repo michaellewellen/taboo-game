@@ -8,7 +8,21 @@ let gameStarted = false;
 let expectedPlayerCount = 0;
 let readyPlayers = new Set();
 
+// Reset function to be called when players return to lobby
+function resetGameState() {
+    if (gameStarted) {
+        console.log('[gameplay] Resetting game state - players returned to lobby');
+        gameStarted = false;
+        readyPlayers = new Set();
+        expectedPlayerCount = 0;
+        currentGame = null;
+    }
+}
+
 module.exports = (io, pool, lobby) => {
+
+    // Register reset callback with lobby
+    lobby.registerResetCallback(resetGameState);
 
     io.on('connection', (socket) => {
 
@@ -61,8 +75,8 @@ module.exports = (io, pool, lobby) => {
             const teamA = new Team('A');
             const teamB = new Team('B');
 
-            const colors = ['pink', 'blue', 'green'];
-            const selectedColor = colors[Math.floor(Math.random() * 3)];
+            // Use the session color from lobby (consistent from lobby to game)
+            const selectedColor = lobby.getSessionColor();
 
             // Create Player objects and add to teams
             players.forEach(p => {
@@ -140,6 +154,8 @@ module.exports = (io, pool, lobby) => {
                 gameStarted = false;
                 readyPlayers = new Set();
                 expectedPlayerCount = 0;
+                // Clear lobby players so everyone re-registers
+                lobby.clearPlayers();
             }
         });
         

@@ -78,6 +78,11 @@ joinTeamBBtn.addEventListener('click', ()=>{
 socket.on('update-lobby', (data) => {
     console.log('Lobby update:', data);
 
+    // Apply session color theme to lobby
+    if (data.sessionColor) {
+        document.body.className = `lobby-page theme-${data.sessionColor}`;
+    }
+
     teamAList.innerHTML = '';
     data.teamA.forEach(player => {
         const li = document.createElement('li');
