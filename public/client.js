@@ -75,6 +75,10 @@ joinTeamBBtn.addEventListener('click', ()=>{
     joinTeamBBtn.disabled = true;
 });
 
+// Team name header elements
+const teamAHeader = document.querySelector('#teams .team:first-child h2');
+const teamBHeader = document.querySelector('#teams .team:last-child h2');
+
 socket.on('update-lobby', (data) => {
     console.log('Lobby update:', data);
 
@@ -83,13 +87,20 @@ socket.on('update-lobby', (data) => {
         document.body.className = `lobby-page theme-${data.sessionColor}`;
     }
 
+    // Update team names in headers
+    if (data.teamAName && teamAHeader) {
+        teamAHeader.innerHTML = `${data.teamAName} (<span id="team-a-count">${data.teamA.length}</span>)`;
+    }
+    if (data.teamBName && teamBHeader) {
+        teamBHeader.innerHTML = `${data.teamBName} (<span id="team-b-count">${data.teamB.length}</span>)`;
+    }
+
     teamAList.innerHTML = '';
     data.teamA.forEach(player => {
         const li = document.createElement('li');
         li.textContent = player.name;
         teamAList.appendChild(li);
     });
-    teamACount.textContent = data.teamA.length;
 
     teamBList.innerHTML = '';
     data.teamB.forEach(player => {
@@ -97,12 +108,21 @@ socket.on('update-lobby', (data) => {
         li.textContent = player.name;
         teamBList.appendChild(li);
     });
-    teamBCount.textContent = data.teamB.length;
 
     if(data.teamA.length >= 2 && data.teamB.length >= 2){
     startGameBtn.style.display = 'block';
     } else {
     startGameBtn.style.display = 'none';
+    }
+});
+
+// Prompt first player on a team to name it
+socket.on('prompt-team-name', (data) => {
+    const defaultName = data.team === 'A' ? 'Team A' : 'Team B';
+    const teamName = prompt(`You're the first on ${defaultName}! Give your team a name (or leave blank to keep "${defaultName}"):`);
+
+    if (teamName && teamName.trim()) {
+        socket.emit('set-team-name', { team: data.team, name: teamName.trim() });
     }
 })
 

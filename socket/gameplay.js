@@ -47,8 +47,12 @@ module.exports = (io, pool, lobby) => {
                 readyPlayers.add(data.name);
                 console.log(`[player-ready] Updated ${data.name}'s socket ID. Ready: ${readyPlayers.size}/${expectedPlayerCount}`);
 
-                // Send the session color to this player
-                io.to(socket.id).emit('set-theme', { color: currentGame.selectedColor });
+                // Send the session color and team names to this player
+                io.to(socket.id).emit('set-theme', {
+                    color: currentGame.selectedColor,
+                    teamAName: currentGame.teamA.name,
+                    teamBName: currentGame.teamB.name
+                });
 
                 // Once all players are ready, start the first round
                 if (readyPlayers.size === expectedPlayerCount) {
@@ -71,9 +75,12 @@ module.exports = (io, pool, lobby) => {
             expectedPlayerCount = players.length;
             readyPlayers = new Set();
 
-            // Create Team objects
-            const teamA = new Team('A');
-            const teamB = new Team('B');
+            // Get team names from lobby
+            const teamNames = lobby.getTeamNames();
+
+            // Create Team objects with custom names
+            const teamA = new Team('A', teamNames.teamAName);
+            const teamB = new Team('B', teamNames.teamBName);
 
             // Use the session color from lobby (consistent from lobby to game)
             const selectedColor = lobby.getSessionColor();
@@ -112,6 +119,12 @@ module.exports = (io, pool, lobby) => {
             if (currentGame && currentGame.currentRound) {
                 currentGame.currentRound.pauseTimer();
                 io.to(socket.id).emit('show-violation-decision');
+
+                // Vibrate the clue giver's phone
+                const clueGiver = currentGame.currentRound.clueGiver;
+                if (clueGiver && clueGiver.id) {
+                    io.to(clueGiver.id).emit('buzzer-vibrate');
+                }
             }
         });
 

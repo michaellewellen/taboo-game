@@ -49,10 +49,20 @@ socket.on('connect', () => {
     }
 });
 
-// Handle theme color from server
+// Handle theme color and team names from server
 socket.on('set-theme', (data) => {
     console.log(`[game.js] Setting theme color: ${data.color}`);
     document.body.className = `theme-${data.color}`;
+
+    // Update team names if provided
+    if (data.teamAName) {
+        const teamANameEl = document.getElementById('team-a-name');
+        if (teamANameEl) teamANameEl.textContent = data.teamAName;
+    }
+    if (data.teamBName) {
+        const teamBNameEl = document.getElementById('team-b-name');
+        if (teamBNameEl) teamBNameEl.textContent = data.teamBName;
+    }
 });
 
 // DOM Elements
@@ -141,6 +151,7 @@ socket.on('countdown', (data) => {
     } else if (data.count === 'GO!') {
         playSound('countdownGo');
         timerWarningStarted = false;  // Reset for new round
+        isFirstCard = true;  // Reset for new round's first card
     }
 });
 
@@ -166,23 +177,47 @@ socket.on('timer-update', (data) => {
     }
 });
 
+// Track if this is the first card (no flip animation needed)
+let isFirstCard = true;
+
 socket.on('show-card', (data) => {
     hideAllScreens();
     cardDisplay.style.display = 'block';
 
-    // Play card flip/swoosh sound
-    playSound('swoosh');
-
-    cardWord.textContent = data.word;
-    tabooWords.innerHTML = '';
-    data.tabooWords.forEach(word => {
-        const li = document.createElement('li');
-        li.textContent = word;
-        tabooWords.appendChild(li);
-    });
-
     const card = document.getElementById('card');
-    card.className = `card ${data.color}`;
+
+    function updateCardContent() {
+        cardWord.textContent = data.word;
+        tabooWords.innerHTML = '';
+        data.tabooWords.forEach(word => {
+            const li = document.createElement('li');
+            li.textContent = word;
+            tabooWords.appendChild(li);
+        });
+        card.className = `card ${data.color}`;
+    }
+
+    if (isFirstCard) {
+        // First card - just show it
+        updateCardContent();
+        card.classList.add('flip-in');
+        playSound('swoosh');
+        isFirstCard = false;
+    } else {
+        // Subsequent cards - flip animation
+        card.classList.add('flip-out');
+
+        setTimeout(() => {
+            updateCardContent();
+            card.classList.remove('flip-out');
+            card.classList.add('flip-in');
+            playSound('swoosh');
+
+            setTimeout(() => {
+                card.classList.remove('flip-in');
+            }, 300);
+        }, 300);
+    }
 
     if (data.role === 'clue-giver') {
         clueGiverControls.style.display = 'block';
@@ -207,6 +242,13 @@ socket.on('show-waiting', (data) => {
 
 socket.on('show-violation-decision', () => {
     violationDecision.style.display = 'flex';
+});
+
+// Vibrate clue giver's phone when buzzer is pressed
+socket.on('buzzer-vibrate', () => {
+    if ('vibrate' in navigator) {
+        navigator.vibrate([200, 100, 200, 100, 200]);  // Vibrate pattern
+    }
 });
 
 socket.on('show-recap', (data) => {
@@ -244,8 +286,8 @@ socket.on('game-ended', (data) => {
 
     winnerText.textContent = data.message;
     finalScores.innerHTML = `
-        <p>Team A: ${data.teamAScore}</p>
-        <p>Team B: ${data.teamBScore}</p>
+        <p>${data.teamAName || 'Team A'}: ${data.teamAScore}</p>
+        <p>${data.teamBName || 'Team B'}: ${data.teamBScore}</p>
     `;
 });
 

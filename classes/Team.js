@@ -1,6 +1,7 @@
 class Team {
-    constructor(name) {
-        this.name = name;
+    constructor(id, displayName = null) {
+        this.id = id;  // 'A' or 'B'
+        this.name = displayName || `Team ${id}`;  // Custom name or default
         this.players = [];
         this.score = 0;
     }

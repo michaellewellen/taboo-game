@@ -170,6 +170,8 @@ class Game {
         
 
         io.emit('game-ended', {
+            teamAName: this.teamA.name,
+            teamBName: this.teamB.name,
             teamAScore: this.teamA.score,
             teamBScore: this.teamB.score,
             winner: winner ? winner.name : 'TIE',
