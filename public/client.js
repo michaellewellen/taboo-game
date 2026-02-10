@@ -114,3 +114,22 @@ socket.on('navigate-to-game', () => {
     console.log('Navigating to game...');
     window.location.href = '/game.html';
 });
+
+// Reset cards button
+const resetCardsBtn = document.getElementById('reset-cards-btn');
+const resetStatus = document.getElementById('reset-status');
+
+resetCardsBtn.addEventListener('click', async () => {
+    if (confirm('Reset all cards to unused? This will give everyone a fresh deck.')) {
+        try {
+            const response = await fetch('/api/reset-cards', { method: 'POST' });
+            const data = await response.json();
+            resetStatus.textContent = `${data.count} cards reset!`;
+            setTimeout(() => {
+                resetStatus.textContent = '';
+            }, 3000);
+        } catch (err) {
+            resetStatus.textContent = 'Error resetting cards';
+        }
+    }
+});
