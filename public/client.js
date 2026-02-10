@@ -124,7 +124,29 @@ socket.on('prompt-team-name', (data) => {
     if (teamName && teamName.trim()) {
         socket.emit('set-team-name', { team: data.team, name: teamName.trim() });
     }
-})
+});
+
+// Fetch and display leaderboard
+async function loadLeaderboard() {
+    try {
+        const response = await fetch('/api/leaderboard');
+        const data = await response.json();
+        const leaderboardList = document.getElementById('leaderboard-list');
+
+        if (data.length === 0) {
+            leaderboardList.innerHTML = '<li>No games played yet</li>';
+        } else {
+            leaderboardList.innerHTML = data.map((entry, index) =>
+                `<li><span class="rank">${index + 1}.</span> ${entry.team_name} <span class="wins">${entry.wins} win${entry.wins > 1 ? 's' : ''}</span></li>`
+            ).join('');
+        }
+    } catch (err) {
+        console.log('Could not load leaderboard:', err);
+    }
+}
+
+// Load leaderboard on page load
+loadLeaderboard();
 
 startGameBtn.addEventListener('click', () => {
     socket.emit('start-game');
