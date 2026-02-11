@@ -107,7 +107,8 @@ module.exports = (io, pool, lobby) => {
 
         // Monitoring team clicks "Start Round"
         socket.on('start-round', () => {
-            if (currentGame && currentGame.currentRound) {
+            if (currentGame && currentGame.currentRound && !currentGame.currentRound.hasStarted) {
+                currentGame.currentRound.hasStarted = true;  // Prevent duplicate starts
                 currentGame.currentRound.startRound(io, (card) => {
                     // After countdown, emit card to all players
                     emitCard(io, card, currentGame.currentRound);
@@ -148,8 +149,14 @@ module.exports = (io, pool, lobby) => {
         });
 
         socket.on('recap-done', async () => {
-            if (currentGame) {
-                await currentGame.startNextRound(io);
+            // Use a flag to prevent multiple players clicking Continue from starting multiple rounds
+            if (currentGame && !currentGame.waitingForNextRound) {
+                currentGame.waitingForNextRound = true;  // Lock to prevent duplicates
+                try {
+                    await currentGame.startNextRound(io);
+                } finally {
+                    if (currentGame) currentGame.waitingForNextRound = false;
+                }
             }
         });
 

@@ -46,6 +46,7 @@ gameplayHandler(io, pool, lobby);
 app.get('/api/force-reset', (req, res) => {
     const result = gameplayHandler.resetGameState();
     lobby.resetPlayers();  // Also clear lobby
+    io.emit('navigate-to-lobby');  // Tell all clients to go back to lobby
     res.json(result);
 });
 
