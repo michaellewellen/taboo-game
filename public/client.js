@@ -78,11 +78,6 @@ joinTeamBBtn.addEventListener('click', ()=>{
 socket.on('update-lobby', (data) => {
     console.log('Lobby update:', data);
 
-    // Apply session color theme to lobby
-    if (data.sessionColor) {
-        document.body.className = `lobby-page theme-${data.sessionColor}`;
-    }
-
     teamAList.innerHTML = '';
     data.teamA.forEach(player => {
         const li = document.createElement('li');
@@ -104,7 +99,7 @@ socket.on('update-lobby', (data) => {
     } else {
     startGameBtn.style.display = 'none';
     }
-});
+})
 
 startGameBtn.addEventListener('click', () => {
     socket.emit('start-game');
@@ -114,24 +109,3 @@ socket.on('navigate-to-game', () => {
     console.log('Navigating to game...');
     window.location.href = '/game.html';
 });
-
-// Reset cards button
-const resetCardsBtn = document.getElementById('reset-cards-btn');
-const resetStatus = document.getElementById('reset-status');
-
-if (resetCardsBtn) {
-    resetCardsBtn.addEventListener('click', async () => {
-        if (confirm('Reset all cards to unused? This will give everyone a fresh deck.')) {
-            try {
-                const response = await fetch('/api/reset-cards', { method: 'POST' });
-                const data = await response.json();
-                resetStatus.textContent = `${data.count} cards reset!`;
-                setTimeout(() => {
-                    resetStatus.textContent = '';
-                }, 3000);
-            } catch (err) {
-                resetStatus.textContent = 'Error resetting cards';
-            }
-        }
-    });
-}

@@ -144,35 +144,6 @@ body.lobby-page {
     font-size: 0.9rem;
 }
 
-#admin-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-}
-
-.reset-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    background-color: transparent;
-    color: #888;
-    border: 2px solid #555;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.reset-btn:hover {
-    color: var(--theme-color);
-    border-color: var(--theme-color);
-}
-
-#reset-status {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: var(--theme-color);
-}
-
 /* ============================================
    BUTTON STYLES
    ============================================ */
@@ -737,278 +708,48 @@ button {
 }
 
 /* ============================================
-   RESPONSIVE - MOBILE FIRST
+   RESPONSIVE
    ============================================ */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     body {
         padding: 10px;
-        align-items: flex-start;
-    }
-
-    /* Lobby mobile adjustments */
-    body.lobby-page {
-        background-size: 150px auto;
-        background-position: center 15px;
-        padding-top: 180px;
+        background-size: 200px auto;
     }
 
     #lobby {
-        padding: 15px;
-        border-radius: 15px;
-        border-width: 2px;
+        padding: 20px;
     }
 
     #lobby h1 {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-    }
-
-    #name-entry {
-        margin: 15px 0;
-    }
-
-    #name-entry label {
-        font-size: 1rem;
-    }
-
-    #player-name {
-        width: 100%;
-        max-width: 280px;
-        padding: 12px 15px;
-        font-size: 16px; /* Prevents iOS zoom on focus */
+        font-size: 1.8rem;
     }
 
     #teams {
         flex-direction: column;
-        gap: 15px;
-        margin: 20px 0;
-    }
-
-    .team {
-        padding: 15px;
-    }
-
-    .team h2 {
-        font-size: 1.1rem;
-    }
-
-    .team ul {
-        min-height: 80px;
-    }
-
-    .team li {
-        padding: 8px;
-        margin: 5px 0;
-        font-size: 0.9rem;
-    }
-
-    #join-team-a, #join-team-b {
-        padding: 12px;
-        font-size: 0.9rem;
-    }
-
-    #start-game {
-        padding: 15px 40px;
-        font-size: 1.2rem;
-        margin: 20px auto;
-    }
-
-    #status {
-        font-size: 0.8rem;
-    }
-
-    #admin-section {
-        margin-top: 20px;
-        padding-top: 15px;
-    }
-
-    .reset-btn {
-        font-size: 0.8rem;
-        padding: 8px 15px;
-    }
-
-    /* Game page mobile adjustments */
-    #game-container {
-        min-height: auto;
-        padding-bottom: 20px;
-    }
-
-    /* Timer mobile position */
-    #timer-display {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 60px;
-        height: 60px;
-    }
-
-    .pie-timer {
-        width: 60px;
-        height: 60px;
-    }
-
-    .pie-timer::before {
-        width: 45px;
-        height: 45px;
-    }
-
-    .pie-timer-text {
-        font-size: 1.2rem;
-    }
-
-    /* Scores mobile position */
-    #scores-container {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        gap: 5px;
-    }
-
-    .score-display {
-        padding: 5px 10px;
-        border-radius: 8px;
-    }
-
-    .score-display .team-name {
-        font-size: 0.6rem;
-    }
-
-    .score-display .score {
-        font-size: 1.3rem;
-    }
-
-    /* Card mobile adjustments */
-    #card-display {
-        padding-top: 80px;
     }
 
     .card {
-        width: calc(100vw - 40px);
-        max-width: 320px;
-        min-height: 320px;
+        width: 280px;
+        min-height: 350px;
         padding: 20px;
-        border-radius: 15px;
-        border-width: 4px;
     }
 
     #card-word {
-        font-size: 1.8rem;
-        padding: 15px 5px;
-        margin-bottom: 15px;
+        font-size: 2rem;
     }
 
     #taboo-words li {
-        font-size: 1.1rem;
-        padding: 10px 5px;
-    }
-
-    /* Game buttons mobile */
-    #clue-giver-controls,
-    #monitor-controls {
-        gap: 15px;
-        padding: 10px;
+        font-size: 1.2rem;
     }
 
     .game-btn {
-        width: 85px;
-        height: 85px;
-        font-size: 0.75rem;
-        border-width: 3px;
-        margin: 5px;
-    }
-
-    .game-btn.start {
         width: 100px;
         height: 100px;
         font-size: 0.9rem;
     }
 
-    /* Countdown mobile */
     #countdown-display {
-        font-size: 35vw;
-    }
-
-    /* Waiting/Ready screens mobile */
-    #waiting-screen,
-    #ready-screen {
-        min-height: 50vh;
-        padding: 30px 20px;
-    }
-
-    #waiting-screen h2,
-    #waiting-title,
-    #ready-screen h2 {
-        font-size: 1.8rem;
-    }
-
-    #waiting-message,
-    #ready-message {
-        font-size: 1.1rem;
-        max-width: 300px;
-    }
-
-    /* Violation decision mobile */
-    #violation-decision h2 {
-        font-size: 1.5rem;
-        padding: 0 20px;
-        text-align: center;
-    }
-
-    /* Recap screen mobile */
-    #recap-screen {
-        padding: 30px 15px;
-    }
-
-    #recap-screen h2 {
-        font-size: 1.5rem;
-    }
-
-    .recap-card {
-        padding: 10px 15px;
-        font-size: 0.9rem;
-    }
-
-    /* Game over mobile */
-    #winner-text {
-        font-size: 1.8rem;
-        padding: 0 20px;
-    }
-
-    #final-scores p {
-        font-size: 1.2rem;
-    }
-}
-
-/* Extra small phones */
-@media (max-width: 380px) {
-    body.lobby-page {
-        background-size: 120px auto;
-        padding-top: 150px;
-    }
-
-    #lobby h1 {
-        font-size: 1.2rem;
-    }
-
-    .card {
-        min-height: 280px;
-        padding: 15px;
-    }
-
-    #card-word {
-        font-size: 1.5rem;
-    }
-
-    #taboo-words li {
-        font-size: 1rem;
-        padding: 8px 5px;
-    }
-
-    .game-btn {
-        width: 70px;
-        height: 70px;
-        font-size: 0.65rem;
+        font-size: 40vw;
     }
 }

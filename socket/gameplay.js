@@ -8,27 +8,6 @@ let gameStarted = false;
 let expectedPlayerCount = 0;
 let readyPlayers = new Set();
 
-// Guards to prevent duplicate actions from multiple clients
-let firstRoundStarted = false;
-let roundInProgress = false;
-let waitingForRecap = false;
-
-// Function to force-reset all state (can be called from API)
-function forceReset(lobbyRef) {
-    console.log('[FORCE RESET] Clearing all game state');
-    currentGame = null;
-    gameStarted = false;
-    readyPlayers = new Set();
-    expectedPlayerCount = 0;
-    firstRoundStarted = false;
-    roundInProgress = false;
-    waitingForRecap = false;
-    if (lobbyRef) {
-        lobbyRef.clearPlayers();
-    }
-}
-
-// Export the reset function for use by API routes
 module.exports = (io, pool, lobby) => {
 
     io.on('connection', (socket) => {
@@ -36,7 +15,7 @@ module.exports = (io, pool, lobby) => {
         // Player connected to game.html and is identifying themselves
         socket.on('player-ready', (data) => {
             console.log(`[player-ready] Received from ${data.name} (Team ${data.team}), socket: ${socket.id}`);
-            console.log(`[player-ready] currentGame: ${!!currentGame}, gameStarted: ${gameStarted}, firstRoundStarted: ${firstRoundStarted}`);
+            console.log(`[player-ready] currentGame exists: ${!!currentGame}, gameStarted: ${gameStarted}`);
 
             if (!currentGame) {
                 console.log(`[player-ready] ERROR: No currentGame! Cannot process player-ready.`);
@@ -57,9 +36,8 @@ module.exports = (io, pool, lobby) => {
                 // Send the session color to this player
                 io.to(socket.id).emit('set-theme', { color: currentGame.selectedColor });
 
-                // Once all players are ready, start the first round (ONLY ONCE!)
-                if (readyPlayers.size === expectedPlayerCount && !firstRoundStarted) {
-                    firstRoundStarted = true;
+                // Once all players are ready, start the first round
+                if (readyPlayers.size === expectedPlayerCount) {
                     console.log('[player-ready] All players ready! Starting first round...');
                     currentGame.startNextRound(io);
                 }
@@ -70,17 +48,8 @@ module.exports = (io, pool, lobby) => {
 
         // Someone clicks "Start Game" in lobby
         socket.on('start-game', async () => {
-            console.log(`[start-game] Received, gameStarted: ${gameStarted}`);
-            if (gameStarted) {
-                console.log('[start-game] Game already started, ignoring');
-                return;
-            }
+            if (gameStarted) return;
             gameStarted = true;
-
-            // Reset all guards for new game
-            firstRoundStarted = false;
-            roundInProgress = false;
-            waitingForRecap = false;
 
             const players = lobby.getPlayers();
             console.log('Initializing game with players:', players);
@@ -92,8 +61,8 @@ module.exports = (io, pool, lobby) => {
             const teamA = new Team('A');
             const teamB = new Team('B');
 
-            // Use the session color from lobby (consistent from lobby to game)
-            const selectedColor = lobby.getSessionColor();
+            const colors = ['pink', 'blue', 'green'];
+            const selectedColor = colors[Math.floor(Math.random() * 3)];
 
             // Create Player objects and add to teams
             players.forEach(p => {
@@ -115,16 +84,9 @@ module.exports = (io, pool, lobby) => {
             io.emit('navigate-to-game');
         });
 
-        // Monitoring team clicks "Start Round" - ONLY FIRST CLICK COUNTS
+        // Monitoring team clicks "Start Round"
         socket.on('start-round', () => {
-            console.log(`[start-round] Received, roundInProgress: ${roundInProgress}`);
-            if (roundInProgress) {
-                console.log('[start-round] Round already in progress, ignoring');
-                return;
-            }
             if (currentGame && currentGame.currentRound) {
-                roundInProgress = true;
-                console.log('[start-round] Starting round countdown...');
                 currentGame.currentRound.startRound(io, (card) => {
                     // After countdown, emit card to all players
                     emitCard(io, card, currentGame.currentRound);
@@ -164,45 +126,24 @@ module.exports = (io, pool, lobby) => {
             }
         });
 
-        // Continue after recap - ONLY FIRST CLICK COUNTS
         socket.on('recap-done', async () => {
-            console.log(`[recap-done] Received, waitingForRecap: ${waitingForRecap}`);
-            if (waitingForRecap) {
-                console.log('[recap-done] Already processing, ignoring duplicate');
-                return;
-            }
             if (currentGame) {
-                waitingForRecap = true;
-                roundInProgress = false;  // Reset for next round
-                console.log('[recap-done] Starting next round...');
                 await currentGame.startNextRound(io);
-                waitingForRecap = false;  // Allow next recap
             }
         });
 
         socket.on('play-again', () => {
-            console.log('[play-again] Resetting ALL game state');
             if (currentGame) {
                 currentGame.playAgain(io);
+                currentGame = null;
+                // Reset game state so a new game can be started
+                gameStarted = false;
+                readyPlayers = new Set();
+                expectedPlayerCount = 0;
             }
-            // Reset ALL state
-            currentGame = null;
-            gameStarted = false;
-            readyPlayers = new Set();
-            expectedPlayerCount = 0;
-            firstRoundStarted = false;
-            roundInProgress = false;
-            waitingForRecap = false;
-            // Clear lobby players so everyone re-registers
-            lobby.clearPlayers();
         });
-
-    });
-
-    // Return the forceReset function bound to lobby
-    return {
-        forceReset: () => forceReset(lobby)
-    };
+        
+    }); 
 };
 
 function emitCard(io, card, round) {
@@ -221,7 +162,7 @@ function emitCard(io, card, round) {
     activeTeamIds.forEach(id => {
         if (id !== clueGiverId) {
             io.to(id).emit('show-waiting', {
-                message: 'Listen and guess!',
+                message: 'Listen and guess!', 
                 clueGiver: round.clueGiver.name
             });
         }
