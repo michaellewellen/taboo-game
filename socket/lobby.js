@@ -15,16 +15,16 @@ module.exports = (io) => {
     io.on('connection', (socket) => {
         console.log('A player connected:', socket.id);
 
-        // When a player connects to lobby, ensure game state is reset
-        // This handles the case where players manually return to lobby
-        if (resetGameCallback) {
-            resetGameCallback();
-        }
-
         sendLobbyUpdate();
 
         socket.on('join-team', (data) => {
             console.log(`${data.name} joined Team ${data.team}`);
+
+            // If this is the first player joining a fresh lobby, reset game state
+            if (players.length === 0 && resetGameCallback) {
+                console.log('First player joining fresh lobby - resetting game state');
+                resetGameCallback();
+            }
 
             const teamPlayers = players.filter(p => p.team === data.team);
             const isFirstOnTeam = teamPlayers.length === 0;
