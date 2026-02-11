@@ -40,7 +40,15 @@ const lobbyHandler = require('./socket/lobby');
 const gameplayHandler = require('./socket/gameplay');
 
 const lobby = lobbyHandler(io);
-gameplayHandler(io, pool, lobby);
+const gameplay = gameplayHandler(io, pool, lobby);
+
+// Force reset endpoint - use this to clear stale game state
+app.post('/api/force-reset', (req, res) => {
+    console.log('[API] Force reset requested');
+    gameplay.forceReset();
+    lobby.clearPlayers();
+    res.json({ success: true, message: 'Game state reset' });
+});
 
 // Start server
 server.listen(PORT, '0.0.0.0', () => {
