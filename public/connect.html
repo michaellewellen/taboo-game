@@ -56,8 +56,8 @@
             <p><em>Or share this link with other players</em></p>
         </div>
     </div>
-    <div class=""admin-section">
-        <button id = "reset-cards_btn" class="reset-btn">Reset All Cards to Unused</button>
+    <div class="admin-section">
+        <button id="reset-cards-btn" class="reset-btn">Reset All Cards to Unused</button>
         <p id="reset-status"></p>
     </div>
     <script>
@@ -72,7 +72,7 @@
             if (confirm('Reset all cards to unused? This will give everyone a fresh slate.')){
                 const response = await fetch('/api/reset-cards', {method: 'POST' });
                 const data = await response.json();
-                document.getElementById('reset-status').textConten = 
+                document.getElementById('reset-status').textContent =
                     `${data.count} cards reset to unused`;
                 setTimeout(() => {
                     document.getElementById('reset-status').textContent = '';

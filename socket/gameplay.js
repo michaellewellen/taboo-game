@@ -180,6 +180,10 @@ module.exports.resetGameState = resetGameState;
 module.exports.getGameState = getGameState;
 
 function emitCard(io, card, round) {
+    if (!card) {
+        console.error('emitCard called with null card — deck may be exhausted');
+        return;
+    }
     const clueGiverId = round.clueGiver.id;
     const activeTeamIds = round.activeTeam.players.map(p => p.id);
 

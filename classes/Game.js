@@ -1,5 +1,7 @@
 const Round = require('./Round');
 const Card = require('./Card');
+const path = require('path');
+const fs = require('fs');
 
 class Game {
     constructor(teamA, teamB, selectedColor, pool) {
@@ -32,6 +34,9 @@ class Game {
     }
 
     async loadDeck() {
+        if (!this.pool) {
+            return this.loadDeckFromJSON();
+        }
         try {
             const result = await this.pool.query(
                 'SELECT * FROM taboo_cards WHERE color = $1 AND used = false',
@@ -46,12 +51,28 @@ class Game {
 
             // Shuffle the deck so cards come in random order
             this.deck = this.shuffleArray(this.deck);
-            console.log(`Loaded and shuffled ${this.deck.length} cards`);
+            console.log(`Loaded and shuffled ${this.deck.length} cards from database`);
 
         } catch(err) {
-            console.error('Error loading deck:', err);
-            return 0;
+            console.error('Error loading deck from database, falling back to JSON:', err.message);
+            return this.loadDeckFromJSON();
         }
+    }
+
+    loadDeckFromJSON() {
+        const cardsPath = path.join(__dirname, '..', 'cards.json');
+        const cardsData = JSON.parse(fs.readFileSync(cardsPath, 'utf8'));
+        const colors = ['pink', 'blue', 'green'];
+
+        this.deck = cardsData.map((card, index) => {
+            const color = colors[index % colors.length];
+            return new Card(index + 1, card.word, card.taboo, color);
+        });
+
+        // Filter to selected color, then shuffle
+        this.deck = this.deck.filter(c => c.color === this.selectedColor);
+        this.deck = this.shuffleArray(this.deck);
+        console.log(`Loaded and shuffled ${this.deck.length} cards from cards.json (color: ${this.selectedColor})`);
     }
 
     getNextClueGiver() {
@@ -84,6 +105,16 @@ class Game {
     }
 
     async checkDeckStatus() {
+        if (!this.pool) {
+            // No database — just reload from JSON if deck is low
+            if (this.deck.length < 10) {
+                console.log(`Only ${this.deck.length} cards left in deck — reloading from JSON`);
+                this.loadDeckFromJSON();
+                return true;
+            }
+            return false;
+        }
+
         const result = await this.pool.query(
             'SELECT COUNT(*) FROM taboo_cards WHERE color = $1 AND used = false',
             [this.selectedColor]
