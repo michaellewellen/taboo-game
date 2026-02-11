@@ -38,5 +38,14 @@ module.exports = (io) => {
         });
     }
 
-    return { getPlayers: () => players };
+    function resetPlayers() {
+        console.log('[FORCE RESET] Clearing all lobby players');
+        players = [];
+        sendLobbyUpdate();
+    }
+
+    return {
+        getPlayers: () => players,
+        resetPlayers: resetPlayers
+    };
 };

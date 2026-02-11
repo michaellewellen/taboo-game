@@ -8,6 +8,27 @@ let gameStarted = false;
 let expectedPlayerCount = 0;
 let readyPlayers = new Set();
 
+// Export reset function for API endpoint
+function resetGameState() {
+    console.log('[FORCE RESET] Resetting all game state');
+    if (currentGame) {
+        currentGame = null;
+    }
+    gameStarted = false;
+    expectedPlayerCount = 0;
+    readyPlayers = new Set();
+    return { success: true, message: 'Game state reset' };
+}
+
+function getGameState() {
+    return {
+        gameStarted,
+        hasCurrentGame: !!currentGame,
+        expectedPlayerCount,
+        readyPlayersCount: readyPlayers.size
+    };
+}
+
 module.exports = (io, pool, lobby) => {
 
     io.on('connection', (socket) => {
@@ -133,18 +154,23 @@ module.exports = (io, pool, lobby) => {
         });
 
         socket.on('play-again', () => {
+            console.log('[play-again] Resetting game state');
             if (currentGame) {
                 currentGame.playAgain(io);
-                currentGame = null;
-                // Reset game state so a new game can be started
-                gameStarted = false;
-                readyPlayers = new Set();
-                expectedPlayerCount = 0;
             }
+            // ALWAYS reset state, even if currentGame is null
+            currentGame = null;
+            gameStarted = false;
+            readyPlayers = new Set();
+            expectedPlayerCount = 0;
         });
-        
-    }); 
+
+    });
 };
+
+// Attach utility functions to the exported handler
+module.exports.resetGameState = resetGameState;
+module.exports.getGameState = getGameState;
 
 function emitCard(io, card, round) {
     const clueGiverId = round.clueGiver.id;

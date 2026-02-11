@@ -42,6 +42,18 @@ const gameplayHandler = require('./socket/gameplay');
 const lobby = lobbyHandler(io);
 gameplayHandler(io, pool, lobby);
 
+// Force reset API endpoint (for debugging stuck game state)
+app.get('/api/force-reset', (req, res) => {
+    const result = gameplayHandler.resetGameState();
+    lobby.resetPlayers();  // Also clear lobby
+    res.json(result);
+});
+
+// Game state debug endpoint
+app.get('/api/game-state', (req, res) => {
+    res.json(gameplayHandler.getGameState());
+});
+
 // Start server
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`\n=== Server Started ===`);
