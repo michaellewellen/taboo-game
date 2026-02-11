@@ -155,7 +155,7 @@ class Game {
         });
     }
 
-    async endGame(io) {
+    endGame(io) {
         this.gameState = 'ended';
 
         if(this.currentRound) {
@@ -167,22 +167,9 @@ class Game {
             : this.teamB.score > this.teamA.score
                 ? this.teamB
                 : null;
-
-        // Save game to history
-        try {
-            await this.pool.query(
-                `INSERT INTO game_history (team_a_name, team_b_name, team_a_score, team_b_score, winner)
-                 VALUES ($1, $2, $3, $4, $5)`,
-                [this.teamA.name, this.teamB.name, this.teamA.score, this.teamB.score, winner ? winner.name : 'TIE']
-            );
-            console.log('Game saved to history');
-        } catch (err) {
-            console.error('Error saving game history:', err);
-        }
+        
 
         io.emit('game-ended', {
-            teamAName: this.teamA.name,
-            teamBName: this.teamB.name,
             teamAScore: this.teamA.score,
             teamBScore: this.teamB.score,
             winner: winner ? winner.name : 'TIE',

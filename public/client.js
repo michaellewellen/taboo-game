@@ -75,10 +75,6 @@ joinTeamBBtn.addEventListener('click', ()=>{
     joinTeamBBtn.disabled = true;
 });
 
-// Team name header elements
-const teamAHeader = document.querySelector('#teams .team:first-child h2');
-const teamBHeader = document.querySelector('#teams .team:last-child h2');
-
 socket.on('update-lobby', (data) => {
     console.log('Lobby update:', data);
 
@@ -87,20 +83,13 @@ socket.on('update-lobby', (data) => {
         document.body.className = `lobby-page theme-${data.sessionColor}`;
     }
 
-    // Update team names in headers
-    if (data.teamAName && teamAHeader) {
-        teamAHeader.innerHTML = `${data.teamAName} (<span id="team-a-count">${data.teamA.length}</span>)`;
-    }
-    if (data.teamBName && teamBHeader) {
-        teamBHeader.innerHTML = `${data.teamBName} (<span id="team-b-count">${data.teamB.length}</span>)`;
-    }
-
     teamAList.innerHTML = '';
     data.teamA.forEach(player => {
         const li = document.createElement('li');
         li.textContent = player.name;
         teamAList.appendChild(li);
     });
+    teamACount.textContent = data.teamA.length;
 
     teamBList.innerHTML = '';
     data.teamB.forEach(player => {
@@ -108,6 +97,7 @@ socket.on('update-lobby', (data) => {
         li.textContent = player.name;
         teamBList.appendChild(li);
     });
+    teamBCount.textContent = data.teamB.length;
 
     if(data.teamA.length >= 2 && data.teamB.length >= 2){
     startGameBtn.style.display = 'block';
@@ -115,38 +105,6 @@ socket.on('update-lobby', (data) => {
     startGameBtn.style.display = 'none';
     }
 });
-
-// Prompt first player on a team to name it
-socket.on('prompt-team-name', (data) => {
-    const defaultName = data.team === 'A' ? 'Team A' : 'Team B';
-    const teamName = prompt(`You're the first on ${defaultName}! Give your team a name (or leave blank to keep "${defaultName}"):`);
-
-    if (teamName && teamName.trim()) {
-        socket.emit('set-team-name', { team: data.team, name: teamName.trim() });
-    }
-});
-
-// Fetch and display leaderboard
-async function loadLeaderboard() {
-    try {
-        const response = await fetch('/api/leaderboard');
-        const data = await response.json();
-        const leaderboardList = document.getElementById('leaderboard-list');
-
-        if (data.length === 0) {
-            leaderboardList.innerHTML = '<li>No games played yet</li>';
-        } else {
-            leaderboardList.innerHTML = data.map((entry, index) =>
-                `<li><span class="rank">${index + 1}.</span> ${entry.team_name} <span class="wins">${entry.wins} win${entry.wins > 1 ? 's' : ''}</span></li>`
-            ).join('');
-        }
-    } catch (err) {
-        console.log('Could not load leaderboard:', err);
-    }
-}
-
-// Load leaderboard on page load
-loadLeaderboard();
 
 startGameBtn.addEventListener('click', () => {
     socket.emit('start-game');
@@ -161,17 +119,19 @@ socket.on('navigate-to-game', () => {
 const resetCardsBtn = document.getElementById('reset-cards-btn');
 const resetStatus = document.getElementById('reset-status');
 
-resetCardsBtn.addEventListener('click', async () => {
-    if (confirm('Reset all cards to unused? This will give everyone a fresh deck.')) {
-        try {
-            const response = await fetch('/api/reset-cards', { method: 'POST' });
-            const data = await response.json();
-            resetStatus.textContent = `${data.count} cards reset!`;
-            setTimeout(() => {
-                resetStatus.textContent = '';
-            }, 3000);
-        } catch (err) {
-            resetStatus.textContent = 'Error resetting cards';
+if (resetCardsBtn) {
+    resetCardsBtn.addEventListener('click', async () => {
+        if (confirm('Reset all cards to unused? This will give everyone a fresh deck.')) {
+            try {
+                const response = await fetch('/api/reset-cards', { method: 'POST' });
+                const data = await response.json();
+                resetStatus.textContent = `${data.count} cards reset!`;
+                setTimeout(() => {
+                    resetStatus.textContent = '';
+                }, 3000);
+            } catch (err) {
+                resetStatus.textContent = 'Error resetting cards';
+            }
         }
-    }
-});
+    });
+}

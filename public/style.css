@@ -173,49 +173,6 @@ body.lobby-page {
     color: var(--theme-color);
 }
 
-#leaderboard-section {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-}
-
-#leaderboard-section h3 {
-    color: var(--theme-color);
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-#leaderboard-list {
-    list-style: none;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-#leaderboard-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 15px;
-    margin: 5px 0;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
-
-#leaderboard-list .rank {
-    color: var(--theme-color);
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-#leaderboard-list .wins {
-    color: #888;
-    font-size: 0.8rem;
-}
-
 /* ============================================
    BUTTON STYLES
    ============================================ */
@@ -491,18 +448,10 @@ button {
     align-items: center;
     width: 100%;
     padding-top: 100px;
-    perspective: 1000px;
-}
-
-.card-wrapper {
-    position: relative;
-    width: 320px;
-    min-height: 400px;
-    margin-bottom: 30px;
 }
 
 .card {
-    width: 100%;
+    width: 320px;
     min-height: 400px;
     border-radius: 20px;
     padding: 30px;
@@ -512,39 +461,7 @@ button {
     box-shadow:
         0 10px 40px rgba(0, 0, 0, 0.5),
         inset 0 0 60px rgba(255, 255, 255, 0.1);
-    backface-visibility: hidden;
-    transition: transform 0.4s ease-out, opacity 0.2s ease-out;
-}
-
-/* Card flip animation */
-.card.flip-out {
-    animation: flipOut 0.3s ease-in forwards;
-}
-
-.card.flip-in {
-    animation: flipIn 0.3s ease-out forwards;
-}
-
-@keyframes flipOut {
-    0% {
-        transform: rotateY(0deg) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: rotateY(-90deg) scale(0.9);
-        opacity: 0;
-    }
-}
-
-@keyframes flipIn {
-    0% {
-        transform: rotateY(90deg) scale(0.9);
-        opacity: 0;
-    }
-    100% {
-        transform: rotateY(0deg) scale(1);
-        opacity: 1;
-    }
+    margin-bottom: 30px;
 }
 
 /* Card color themes */
