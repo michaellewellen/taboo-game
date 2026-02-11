@@ -7,6 +7,7 @@ let currentGame = null;
 let gameStarted = false;
 let expectedPlayerCount = 0;
 let readyPlayers = new Set();
+let firstRoundStarted = false;  // Prevent multiple startNextRound calls
 
 // Reset function to be called when players return to lobby
 function resetGameState() {
@@ -15,6 +16,7 @@ function resetGameState() {
     readyPlayers = new Set();
     expectedPlayerCount = 0;
     currentGame = null;
+    firstRoundStarted = false;
 }
 
 module.exports = (io, pool, lobby) => {
@@ -52,8 +54,9 @@ module.exports = (io, pool, lobby) => {
                     teamBName: currentGame.teamB.name
                 });
 
-                // Once all players are ready, start the first round
-                if (readyPlayers.size === expectedPlayerCount) {
+                // Once all players are ready, start the first round (only once!)
+                if (readyPlayers.size === expectedPlayerCount && !firstRoundStarted) {
+                    firstRoundStarted = true;
                     console.log('[player-ready] All players ready! Starting first round...');
                     currentGame.startNextRound(io);
                 }
@@ -72,6 +75,7 @@ module.exports = (io, pool, lobby) => {
 
             expectedPlayerCount = players.length;
             readyPlayers = new Set();
+            firstRoundStarted = false;
 
             // Get team names from lobby
             const teamNames = lobby.getTeamNames();
@@ -165,6 +169,7 @@ module.exports = (io, pool, lobby) => {
                 gameStarted = false;
                 readyPlayers = new Set();
                 expectedPlayerCount = 0;
+                firstRoundStarted = false;
                 // Clear lobby players so everyone re-registers
                 lobby.clearPlayers();
             }
