@@ -10,13 +10,11 @@ let readyPlayers = new Set();
 
 // Reset function to be called when players return to lobby
 function resetGameState() {
-    if (gameStarted) {
-        console.log('[gameplay] Resetting game state - players returned to lobby');
-        gameStarted = false;
-        readyPlayers = new Set();
-        expectedPlayerCount = 0;
-        currentGame = null;
-    }
+    console.log('[gameplay] Resetting game state - fresh lobby');
+    gameStarted = false;
+    readyPlayers = new Set();
+    expectedPlayerCount = 0;
+    currentGame = null;
 }
 
 module.exports = (io, pool, lobby) => {
